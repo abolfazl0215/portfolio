@@ -20,42 +20,69 @@ import Image from "next/image";
 export default function App() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
-  const projects = [
-    {
-      id: 1,
-      image:
-        "https://via.placeholder.com/400x300/3B82F6/FFFFFF?text=Project+1",
-    },
-    {
-      id: 2,
-      image:
-        "https://via.placeholder.com/400x300/3B82F6/FFFFFF?text=Project+2",
-    },
-    {
-      id: 3,
-      image:
-        "https://via.placeholder.com/400x300/3B82F6/FFFFFF?text=Project+3",
-    },
-  ];
-
   const testimonials = [
     {
       id: 1,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      author: "Customer Name1",
-      role: "Job",
+      text: "Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web Full",
+      name: "Aboifazl Mokhtari",
+      role: "Founder",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=1",
     },
     {
       id: 2,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      author: "Customer Name2",
-      role: "Job",
+      text: "Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web Full",
+      name: "Aboifazl Mokhtari",
+      role: "Founder",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=2",
     },
     {
       id: 3,
-      text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      author: "Customer Name3",
-      role: "Job",
+      text: "Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web Full",
+      name: "Aboifazl Mokhtari",
+      role: "Founder",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=3",
+    },
+    {
+      id: 4,
+      text: "Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web Full",
+      name: "Aboifazl Mokhtari",
+      role: "Founder",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=4",
+    },
+  ];
+
+  const projects = [
+    {
+      id: 1,
+      title: "My Projects",
+      description:
+        "Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web",
+      tag: "Website",
+      image: "/project-image.jpg", // مسیر تصویر پروژه
+    },
+    {
+      id: 2,
+      title: "My Projects",
+      description:
+        "Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web",
+      tag: "Website",
+      image: "/project-image.jpg",
+    },
+    {
+      id: 3,
+      title: "My Projects",
+      description:
+        "Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web",
+      tag: "Website",
+      image: "/project-image.jpg",
+    },
+    {
+      id: 4,
+      title: "My Projects",
+      description:
+        "Full-Stack Web Developer I build complete web Full-Stack Web Developer I build complete web",
+      tag: "Website",
+      image: "/project-image.jpg",
     },
   ];
 
@@ -201,76 +228,72 @@ export default function App() {
         {/* About Section */}
         <section
           id="about"
-          className="py-20 px-6 relative bg-[#000B15] z-20">
+          className=" pt-[7vw] pb-[5vw] px-[10vw] relative bg-[#000B15] z-20">
           <div className="container mx-auto">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div className="relative">
+            <div className="flex justify-between items-center ">
+              <div className="relative w-[30%]  ">
                 <div className="relative rounded-3xl overflow-hidden ">
                   <Image
                     src="/images/me32.png"
                     width={1000}
                     height={1000}
                     alt="About"
-                    className="w-full h-auto"
+                    className="w-full  h-auto"
                   />
                 </div>
               </div>
-              <div>
+              <div className="w-[60%]  ">
                 <h2 className="text-4xl font-bold mb-6">About me</h2>
                 <p className="text-gray-400 mb-4 leading-relaxed">
                   I'm a Graphic Designer Lorem ipsum dolor sit amet,
                   consectetur adipiscing elit. Sed do eiusmod tempor
+                  incididunt ut labore et dolore magna aliqua. I'm a
+                  Graphic Designer Lorem ipsum dolor sit amet,
+                  consectetur adipiscing elit. Sed do eiusmod tempor
                   incididunt ut labore et dolore magna aliqua.
                 </p>
-                <ul className="space-y-2 mb-6 text-gray-400">
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#3B82F6]">►</span>
-                    <span>
-                      Lorem ipsum dolor sit amet, consectetur
-                      adipiscing elit
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#3B82F6]">►</span>
-                    <span>
-                      Sed do eiusmod tempor incididunt ut labore
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#3B82F6]">►</span>
-                    <span>
-                      Ut enim ad minim veniam, quis nostrud
-                      exercitation
-                    </span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="text-[#3B82F6]">►</span>
-                    <span>
-                      Duis aute irure dolor in reprehenderit in
-                      voluptate
-                    </span>
-                  </li>
-                </ul>
-                <button className="px-8 py-3 bg-[#3B82F6] rounded-md hover:bg-[#2563EB] transition-colors">
-                  CONTACT ME
-                </button>
-              </div>
-            </div>
 
-            {/* Skills */}
-            <div className="mt-16">
-              <h3 className="text-3xl font-bold mb-8 text-center">
-                Skills
-              </h3>
-              <div className="flex justify-center gap-6 flex-wrap">
-                <div className="w-16 h-16 rounded-lg bg-[#3B82F6] flex items-center justify-center">
-                  <div className="w-10 h-10 bg-white rounded"></div>
-                </div>
-                <div className="w-16 h-16 rounded-lg bg-[#3B82F6] flex items-center justify-center">
-                  <div className="w-10 h-10 bg-white rounded"></div>
-                </div>
-                <div className="w-16 h-16 rounded-lg bg-[#3B82F6] flex items-center justify-center">
-                  <div className="w-10 h-10 bg-white rounded"></div>
+                {/* Skills */}
+                <div className="mt-[3vw]">
+                  <h3 className="text-3xl font-bold mb-8 ">Skills</h3>
+                  <div className="flex gap-[1vw] flex-wrap">
+                    <div className="w-[3vw] h-[3vw] flex justify-center bg-[#CDE6FF] rounded-lg">
+                      <Image
+                        src="/icon/nextjs.svg"
+                        className="w-[70%]"
+                        width={100}
+                        height={100}
+                        alt="next js icon"
+                      />
+                    </div>
+                    <div className="w-[3vw] h-[3vw] flex justify-center bg-[#1F93DF] rounded-lg">
+                      <Image
+                        src="/icon/nodejs.svg"
+                        className="w-[70%]"
+                        width={100}
+                        height={100}
+                        alt="next js icon"
+                      />
+                    </div>
+                    <div className="w-[3vw] h-[3vw] flex justify-center bg-[#CDE6FF] rounded-lg">
+                      <Image
+                        src="/icon/reactjs.svg"
+                        className="w-[70%]"
+                        width={100}
+                        height={100}
+                        alt="next js icon"
+                      />
+                    </div>
+                    <div className="w-[3vw] h-[3vw] flex justify-center bg-[#1F93DF] rounded-lg">
+                      <Image
+                        src="/icon/telegram.svg"
+                        className="w-[70%]"
+                        width={100}
+                        height={100}
+                        alt="next js icon"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -278,7 +301,7 @@ export default function App() {
         </section>
 
         {/* Services Section */}
-        <section id="services" className="py-20 px-6">
+        <section id="services" className="py-20 px-[10vw] grid-bg">
           <div className="container mx-auto">
             <h2 className="text-4xl font-bold mb-4 text-center">
               Services
@@ -290,15 +313,19 @@ export default function App() {
               {[1, 2, 3, 4].map((item) => (
                 <div
                   key={item}
-                  className={`p-8 rounded-2xl border-2 transition-all ${
+                  className={`p-8 rounded-2xl border-2 transition-all cursor-pointer ${
                     item === 2
-                      ? "bg-[#3B82F6] border-[#3B82F6] transform scale-105"
-                      : "bg-[#0D1B2A] border-[#1E3A5F] hover:border-[#3B82F6]"
+                      ? "bg-gradient-to-tr from-blue-500 to-blue-700 border-blue-700 transform scale-105"
+                      : "bg-[#0D1B2A] border-transparent hover:border-[#3B82F6]"
                   }`}>
-                  <div className="w-16 h-16 mb-6 rounded-lg bg-white/10 flex items-center justify-center">
-                    <div className="w-8 h-8 bg-white/20 rounded"></div>
-                  </div>
-                  <h3 className="text-xl font-bold mb-4">
+                  <Image
+                    className="w-[4vw] mb-[1vw]"
+                    src="/icon/web.svg"
+                    width={300}
+                    height={300}
+                    alt="service icon"
+                  />
+                  <h3 className="text-xl font-semibold mb-4">
                     Web Design
                   </h3>
                   <p className="text-gray-400 text-sm leading-relaxed">
@@ -313,100 +340,309 @@ export default function App() {
         </section>
 
         {/* Projects Section */}
-        <section id="portfolio" className="py-20 px-6 bg-[#0D1B2A]">
-          <div className="container mx-auto">
-            <h2 className="text-4xl font-bold mb-4 text-center">
-              My Projects
-            </h2>
-            <p className="text-gray-400 text-center mb-12">
-              Temporibus autem quibusdam et aut officiis debitis aut
-            </p>
-            <div className="max-w-5xl mx-auto">
+        <section className="min-h-screen  py-20 px-[10vw]">
+          <div className="mx-auto">
+            {/* Header */}
+            <div className="text-center mb-16">
+              <h1 className="text-4xl md:text-4xl font-bold text-white mb-4">
+                My Projects
+              </h1>
+              <p className="text-gray-400">
+                Full-Stack Web Developer I build complete web
+              </p>
+            </div>
+
+            {/* Swiper Carousel */}
+            <div className="relative">
               <Swiper
                 modules={[Navigation, Pagination]}
-                spaceBetween={30}
+                spaceBetween={15}
                 slidesPerView={1}
-                navigation
-                pagination={{ clickable: true }}
-                breakpoints={{
-                  640: { slidesPerView: 2 },
-                  1024: { slidesPerView: 3 },
+                navigation={{
+                  nextEl: ".swiper-button-next-custom",
+                  prevEl: ".swiper-button-prev-custom",
                 }}
-                className="projects-swiper">
+                pagination={{
+                  clickable: true,
+                  el: ".swiper-pagination-custom",
+                }}
+                breakpoints={{
+                  640: {
+                    slidesPerView: 1,
+                  },
+                  768: {
+                    slidesPerView: 2,
+                  },
+                  1024: {
+                    slidesPerView: 3.5,
+                  },
+                }}
+                className="pb-16">
                 {projects.map((project) => (
                   <SwiperSlide key={project.id}>
-                    <div className="rounded-2xl overflow-hidden border-2 border-[#1E3A5F] hover:border-[#3B82F6] transition-all">
-                      <img
-                        src={project.image}
-                        alt={`Project ${project.id}`}
-                        className="w-full h-64 object-cover"
+                    <div className="bg-[#0D1B2A] rounded-2xl p-[.5vw] border border-transparent hover:border-blue-500/40 transition-all duration-300 cursor-pointer">
+                      {/* Project Image */}
+                      <Image
+                        alt="eee"
+                        className="rounded-xl"
+                        src="https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg"
+                        width={300}
+                        height={300}
                       />
+
+                      {/* Project Info */}
+                      <div className="px-[.8vw] py-[1vw]">
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-xl font-semibold text-white">
+                            {project.title}
+                          </h3>
+                          <span className="bg-blue-500 text-white px-[1vw] py-[.2vw] rounded-full text-[1vw]">
+                            {project.tag}
+                          </span>
+                        </div>
+                        <p className="text-gray-400 text-sm leading-relaxed mt-[1.5vw]">
+                          {project.description}
+                        </p>
+                      </div>
                     </div>
                   </SwiperSlide>
                 ))}
               </Swiper>
-              <div className="flex justify-center mt-8">
-                <button className="px-8 py-3 bg-[#3B82F6] rounded-full hover:bg-[#2563EB] transition-colors">
-                  Show All
+
+              {/* Custom Navigation Buttons */}
+              <div className="flex items-center justify-center gap-4 mt-8">
+                <button className="swiper-button-prev-custom w-[3vw] h-[3vw] rounded-full border-2 border-blue-500/30 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all">
+                  <svg
+                    className="w-[1.3vw] h-[1.3vw]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+
+                <button className="bg-blue-500 text-white px-8 py-[.7vw] rounded-full font-medium hover:bg-blue-700 transition-all">
+                  See All &gt;
+                </button>
+
+                <button className="swiper-button-next-custom w-[3vw] h-[3vw] rounded-full border-2 border-blue-500/30 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all">
+                  <svg
+                    className="w-[1.3vw] h-[1.3vw]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Custom Pagination */}
+              {/* <div className="swiper-pagination-custom flex justify-center gap-2 mt-6"></div> */}
+            </div>
+          </div>
+
+          <style jsx>{`
+            .swiper-pagination-custom .swiper-pagination-bullet {
+              width: 8px;
+              height: 8px;
+              background: #3b82f6;
+              opacity: 0.3;
+              border-radius: 50%;
+            }
+            .swiper-pagination-custom
+              .swiper-pagination-bullet-active {
+              opacity: 1;
+              width: 24px;
+              border-radius: 4px;
+            }
+          `}</style>
+        </section>
+
+        {/* Testimonials Section */}
+        <section className="min-h-screen bg-gradient-to-b grid-bg from-[#000d1a] to-[#001a33] py-20 px-[10vw]">
+          <div className="max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-4xl font-bold text-white mb-4">
+                Testimonials
+              </h2>
+            </div>
+
+            {/* Slider */}
+            <div className="relative">
+              <Swiper
+                modules={[Navigation, Pagination]}
+                spaceBetween={0}
+                slidesPerView={1.4}
+                centeredSlides={true}
+                initialSlide={2}
+                navigation={{
+                  prevEl: ".swiper-button-prev-custom",
+                  nextEl: ".swiper-button-next-custom",
+                }}
+                pagination={{
+                  el: ".swiper-pagination-custom",
+                  clickable: true,
+                  bulletClass: "swiper-pagination-bullet-custom",
+                  bulletActiveClass:
+                    "swiper-pagination-bullet-active-custom",
+                }}
+                breakpoints={{
+                  640: {
+                    slidesPerView: 1.6,
+                  },
+                  768: {
+                    slidesPerView: 2,
+                  },
+                  1024: {
+                    slidesPerView: 2.2,
+                  },
+                }}
+                slideToClickedSlide={true}
+                className="pb-20">
+                {testimonials.map((testimonial) => (
+                  <SwiperSlide key={testimonial.id}>
+                    {({ isActive }) => (
+                      <div
+                        className={`rounded-3xl p-8 md:p-12 relative shadow-2xl transition-all duration-500 ${
+                          isActive
+                            ? "bg-slate-700 scale-100 opacity-100"
+                            : "bg-[#0D1B2A] scale-90 opacity-80"
+                        }`}>
+                        {/* Quote Icon */}
+                        <div className="absolute top-6 left-6 md:top-8 md:left-8 text-5xl md:text-6xl text-white/20 font-serif">
+                          "
+                        </div>
+
+                        {/* Testimonial Text */}
+                        <div className="mt-12 mb-8 md:mt-16 md:mb-12">
+                          <p
+                            className={`text-lg md:text-xl leading-relaxed transition-colors duration-500 ${
+                              isActive
+                                ? "text-gray-200"
+                                : "text-gray-400"
+                            }`}>
+                            {testimonial.text}
+                          </p>
+                        </div>
+
+                        {/* Author Info */}
+                        <div className="flex items-center gap-4">
+                          <div
+                            className={`w-14 h-14 md:w-16 md:h-16 rounded-full overflow-hidden transition-all duration-500 ${
+                              isActive
+                                ? "bg-blue-500 border-4 border-blue-400"
+                                : "bg-blue-600 border-4 border-blue-500"
+                            }`}>
+                            <img
+                              src={testimonial.avatar}
+                              alt={testimonial.name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                          <div>
+                            <h4
+                              className={`font-semibold text-base md:text-lg transition-colors duration-500 ${
+                                isActive
+                                  ? "text-white"
+                                  : "text-gray-300"
+                              }`}>
+                              {testimonial.name}
+                            </h4>
+                            <p
+                              className={`text-sm transition-colors duration-500 ${
+                                isActive
+                                  ? "text-gray-300"
+                                  : "text-gray-500"
+                              }`}>
+                              {testimonial.role}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+
+              {/* Custom Navigation Buttons */}
+              <div className="flex items-center  justify-center gap-4 mt-8">
+                <button className=" swiper-button-prev-custom w-[3vw] h-[3vw] md:w-12 md:h-12 rounded-full border-2 border-gray-600 flex items-center justify-center text-white hover:bg-blue-500 hover:border-blue-500 transition-all">
+                  <svg
+                    className="w-[1.3vw] h-[1.3vw] md:w-6 md:h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </button>
+
+                {/* Custom Pagination */}
+                <div className=" swiper-pagination-custom max-w-[8vw] flex justify-center gap-2"></div>
+
+                <button className="swiper-button-next-custom w-[3vw] h-[3vw] md:w-12 md:h-12 rounded-full border-2 border-gray-600 flex items-center justify-center text-white hover:bg-blue-500 hover:border-blue-500 transition-all">
+                  <svg
+                    className="w-[1.3vw] h-[1.3vw] md:w-6 md:h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
                 </button>
               </div>
             </div>
           </div>
-        </section>
 
-        {/* Testimonials Section */}
-        <section className="py-20 px-6">
-          <div className="container mx-auto">
-            <h2 className="text-4xl font-bold mb-12 text-center">
-              Testimonials
-            </h2>
-            <div className="max-w-4xl mx-auto">
-              <div className="grid md:grid-cols-3 gap-6">
-                {testimonials.map((testimonial, index) => (
-                  <div
-                    key={testimonial.id}
-                    className="p-8 rounded-2xl bg-[#0D1B2A] border-2 border-[#1E3A5F] hover:border-[#3B82F6] transition-all">
-                    <div className="text-4xl text-[#3B82F6] mb-4">
-                      "
-                    </div>
-                    <p className="text-gray-400 mb-6 text-sm leading-relaxed">
-                      {testimonial.text}
-                    </p>
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 rounded-full bg-[#3B82F6] flex items-center justify-center">
-                        <div className="w-10 h-10 rounded-full bg-white/20"></div>
-                      </div>
-                      <div>
-                        <div className="font-bold">
-                          {testimonial.author}
-                        </div>
-                        <div className="text-sm text-gray-400">
-                          {testimonial.role}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="flex justify-center gap-2 mt-8">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-all ${
-                      activeTestimonial === index
-                        ? "bg-[#3B82F6] w-8"
-                        : "bg-[#1E3A5F]"
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
+          <style>{`
+        .swiper-pagination-bullet-custom {
+          width: 10px;
+          height: 10px;
+          background: #4b5563;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+        
+        .swiper-pagination-bullet-active-custom {
+          background: white;
+          width: 28px;
+          border-radius: 5px;
+        }
+        
+        .swiper-button-prev-custom:disabled,
+        .swiper-button-next-custom:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+
+        .swiper-slide {
+          transition: all 0.5s ease;
+        }
+      `}</style>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 px-6 bg-[#0D1B2A]">
+        <section id="contact" className="py-20 px-[10vw]">
           <div className="container mx-auto">
             <h2 className="text-4xl font-bold mb-4 text-center">
               Contact
@@ -414,7 +650,7 @@ export default function App() {
             <p className="text-gray-400 text-center mb-12">
               Let's Create Something Amazing Together
             </p>
-            <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+            <div className="mx-auto grid md:grid-cols-2 gap-12">
               <div>
                 <h3 className="text-2xl font-bold mb-8">
                   Let's Create Something Amazing Together
@@ -487,7 +723,7 @@ export default function App() {
         </section>
 
         {/* Footer */}
-        <footer className="py-12 px-6 border-t border-[#1E3A5F]">
+        <footer className="py-12 px-[10vw] grid-bg border-t border-[#1E3A5F]">
           <div className="container mx-auto">
             <div className="bg-[#3B82F6] rounded-3xl p-12 text-center mb-12">
               <h3 className="text-3xl font-bold mb-4">
@@ -495,39 +731,8 @@ export default function App() {
               </h3>
             </div>
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <div className="flex gap-4">
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-[#1E3A5F] flex items-center justify-center hover:bg-[#3B82F6] transition-colors">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="26"
-                    height="26"
-                    fill="none"
-                    viewBox="0 0 26 26">
-                    <path
-                      fill="#fff"
-                      d="M13 0c7.18 0 13 5.82 13 13s-5.82 13-13 13S0 20.18 0 13 5.82 0 13 0m5.774 7.8c-.495.009-1.255.27-4.912 1.771q-1.92.79-7.679 3.266-.935.367-.98.718c-.057.45.599.59 1.423.854.673.216 1.577.468 2.047.478q.64.015 1.428-.52 5.38-3.586 5.554-3.625c.082-.018.196-.041.273.026.077.068.07.196.061.23-.065.275-3.434 3.3-3.628 3.499l-.093.093c-.714.706-1.437 1.167-.19 1.977 1.124.732 1.78 1.199 2.938 1.949.74.48 1.321 1.048 2.086.978.352-.032.715-.358.9-1.333.436-2.302 1.294-7.29 1.492-9.346.017-.18-.005-.41-.022-.512a.55.55 0 0 0-.188-.352c-.157-.126-.401-.153-.51-.151"></path>
-                  </svg>
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-[#1E3A5F] flex items-center justify-center hover:bg-[#3B82F6] transition-colors">
-                  <Instagram size={20} />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-[#1E3A5F] flex items-center justify-center hover:bg-[#3B82F6] transition-colors">
-                  <Linkedin size={20} />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-[#1E3A5F] flex items-center justify-center hover:bg-[#3B82F6] transition-colors">
-                  <Github size={20} />
-                </a>
-              </div>
               <div className="text-gray-400 text-sm">
-                © 2024 All Rights Reserved
+                © 2026 All Rights Reserved
               </div>
             </div>
           </div>
