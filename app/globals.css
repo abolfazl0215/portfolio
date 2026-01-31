@@ -59,10 +59,15 @@
   font-display: swap;
 }
 
+*{
+   scroll-behavior: smooth !important;
+}
+
 body {
   background: #000b15;
   color: #fff;
   font-family: "Clash Display", sans-serif;
+ 
 }
 
 .grid-bg {
