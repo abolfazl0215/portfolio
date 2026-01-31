@@ -180,7 +180,7 @@ const HeroSection = () => {
               {/* Image Container - Removed hover scale */}
               <div className="relative rounded-3xl transition-all duration-300 w-4/5 mx-auto">
                 <Image
-                  src="/images/me4.png"
+                  src="/images/me5.png"
                   alt="Abolfazl Mokhtari - Web Developer"
                   className="relative"
                   width={500}
