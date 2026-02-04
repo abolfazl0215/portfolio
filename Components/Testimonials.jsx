@@ -85,18 +85,19 @@ const Testimonials = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.06,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 15, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.4,
+        duration: 0.3,
+        ease: "easeOut",
       },
     },
   };
@@ -105,23 +106,25 @@ const Testimonials = () => {
     <section
       ref={sectionRef}
       className="min-h-screen grid-bg bg-[#0A0F1C] py-20 px-[5vw] lg:px-[10vw] relative overflow-hidden">
-      {/* Simplified Static Background */}
+      
+      {/* بک‌گراند ساده بدون blur */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-blue-500/3 rounded-full" />
+        <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-purple-500/3 rounded-full" />
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-16">
+          
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6">
             <Sparkles className="w-4 h-4 text-blue-400" />
             <span className="text-sm text-blue-400 font-medium">
@@ -138,7 +141,7 @@ const Testimonials = () => {
           </p>
         </motion.div>
 
-        {/* Stats Grid */}
+        {/* Stats Grid - حذف whileHover */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -150,8 +153,7 @@ const Testimonials = () => {
               <motion.div
                 key={index}
                 variants={itemVariants}
-                whileHover={{ y: -5 }}
-                className="bg-[#0D1B2A]/50 border border-gray-800 rounded-2xl p-6 text-center hover:border-blue-500/40 transition-all">
+                className="bg-[#0D1B2A]/50 border border-gray-800 rounded-2xl p-6 text-center hover:border-blue-500/40 transition-all hover:-translate-y-1 will-change-transform">
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-3">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
@@ -166,12 +168,24 @@ const Testimonials = () => {
           })}
         </motion.div>
 
-        {/* Testimonials Slider */}
+        {/* Testimonials Slider با دکمه‌های Navigation در دو طرف */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
           className="relative">
+          
+          {/* دکمه‌های Navigation - فقط در دسکتاپ */}
+          <div className="hidden md:block">
+            <button className="swiper-button-prev-custom absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 lg:w-14 lg:h-14 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg hover:scale-105 active:scale-95 will-change-transform -translate-x-1/2 lg:-translate-x-full lg:left-0">
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <button className="swiper-button-next-custom absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 lg:w-14 lg:h-14 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg hover:scale-105 active:scale-95 will-change-transform translate-x-1/2 lg:translate-x-full lg:right-0">
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={30}
@@ -216,22 +230,23 @@ const Testimonials = () => {
               <SwiperSlide key={testimonial.id}>
                 {({ isActive }) => (
                   <div
-                    className={`relative rounded-3xl p-8 lg:p-10 transition-all duration-300 ${
+                    className={`relative rounded-3xl p-8 lg:p-10 transition-all duration-200 ${
                       isActive
                         ? "bg-[#0D1B2A]/80 border-2 border-blue-500/40 shadow-2xl shadow-blue-500/20 opacity-100 scale-100"
                         : "bg-[#0D1B2A]/50 border-2 border-gray-800 opacity-60 scale-95"
                     }`}>
+                    
                     {/* Quote Icon Background */}
                     <div className="absolute top-6 right-6 opacity-10">
                       <Quote className="w-24 h-24 text-blue-400" />
                     </div>
 
-                    {/* Rating Stars - Simplified */}
+                    {/* Rating Stars */}
                     <div className="flex gap-1 mb-6">
                       {[...Array(testimonial.rating)].map((_, i) => (
                         <Star
                           key={i}
-                          className={`w-5 h-5 fill-yellow-400 text-yellow-400 transition-opacity ${
+                          className={`w-5 h-5 fill-yellow-400 text-yellow-400 transition-opacity duration-200 ${
                             isActive ? "opacity-100" : "opacity-50"
                           }`}
                         />
@@ -241,7 +256,7 @@ const Testimonials = () => {
                     {/* Testimonial Text */}
                     <div className="mb-8 relative z-10">
                       <p
-                        className={`text-lg lg:text-xl leading-relaxed transition-colors duration-300 ${
+                        className={`text-lg lg:text-xl leading-relaxed transition-colors duration-200 ${
                           isActive ? "text-gray-200" : "text-gray-400"
                         }`}>
                         "{testimonial.text}"
@@ -259,7 +274,7 @@ const Testimonials = () => {
                     {/* Author Info */}
                     <div className="flex items-center gap-4 relative z-10">
                       <div
-                        className={`w-16 h-16 rounded-full overflow-hidden transition-all duration-300 border-4 ${
+                        className={`w-16 h-16 rounded-full overflow-hidden transition-all duration-200 border-4 ${
                           isActive
                             ? "border-blue-500 shadow-lg shadow-blue-500/50"
                             : "border-gray-700"
@@ -272,13 +287,13 @@ const Testimonials = () => {
                       </div>
                       <div>
                         <h4
-                          className={`font-bold text-lg transition-colors duration-300 ${
+                          className={`font-bold text-lg transition-colors duration-200 ${
                             isActive ? "text-white" : "text-gray-300"
                           }`}>
                           {testimonial.name}
                         </h4>
                         <p
-                          className={`text-sm transition-colors duration-300 ${
+                          className={`text-sm transition-colors duration-200 ${
                             isActive
                               ? "text-blue-400"
                               : "text-gray-500"
@@ -288,7 +303,7 @@ const Testimonials = () => {
                       </div>
                     </div>
 
-                    {/* Active Indicator - Simplified */}
+                    {/* Active Indicator */}
                     {isActive && (
                       <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-b-3xl" />
                     )}
@@ -298,26 +313,22 @@ const Testimonials = () => {
             ))}
           </Swiper>
 
-          {/* Custom Navigation Buttons */}
-          <div className="hidden md:block flex items-center justify-center gap-6 mt-12">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="swiper-button-prev-custom w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg">
-              <ChevronLeft className="w-6 h-6" />
-            </motion.button>
-
-            {/* Custom Pagination */}
-            <div className="swiper-pagination-custom flex justify-center gap-2"></div>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="swiper-button-next-custom w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg">
-              <ChevronRight className="w-6 h-6" />
-            </motion.button>
-          </div>
+          {/* Custom Pagination - فقط در موبایل */}
+          <div className="swiper-pagination-custom flex justify-center gap-2 mt-8 md:hidden"></div>
         </motion.div>
+
+        {/* دکمه‌های Navigation و Pagination برای موبایل */}
+        <div className="flex md:hidden items-center justify-center gap-6 mt-8">
+          <button className="swiper-button-prev-custom w-12 h-12 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg active:scale-95">
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <div className="swiper-pagination-custom flex justify-center gap-2"></div>
+
+          <button className="swiper-button-next-custom w-12 h-12 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg active:scale-95">
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
       </div>
 
       <style jsx global>{`

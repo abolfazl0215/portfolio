@@ -137,23 +137,25 @@ const Projects = () => {
       ref={sectionRef}
       id="projects"
       className="py-20 px-[5vw] lg:px-[10vw] relative overflow-hidden">
-      {/* Simplified Static Background */}
+      
+      {/* بک‌گراند ساده بدون blur */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-500/3 rounded-full" />
+        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-blue-500/3 rounded-full" />
       </div>
 
       <div className="mx-auto relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-16">
+          
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6">
             <Sparkles className="w-4 h-4 text-blue-400" />
             <span className="text-sm text-blue-400 font-medium">
@@ -170,28 +172,26 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        {/* Filter Tabs */}
+        {/* Filter Tabs - حذف framer-motion */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.15 }}
           className="flex flex-wrap items-center justify-center gap-4 mb-16">
           {filters.map((filter) => {
             const Icon = filter.icon;
             return (
-              <motion.button
+              <button
                 key={filter.id}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all will-change-transform active:scale-95 ${
                   activeFilter === filter.id
                     ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/50"
                     : "bg-gray-800/50 border border-gray-700 text-gray-300 hover:border-blue-500/50"
                 }`}>
                 <Icon className="w-4 h-4" />
                 {filter.label}
-              </motion.button>
+              </button>
             );
           })}
         </motion.div>
@@ -203,7 +203,7 @@ const Projects = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.25 }}
             className="relative px-4">
             {filteredProjects.length > 0 ? (
               <>
@@ -226,31 +226,19 @@ const Projects = () => {
                   }}
                   breakpoints={{
                     640: {
-                      slidesPerView: Math.min(
-                        filteredProjects.length,
-                        1,
-                      ),
+                      slidesPerView: Math.min(filteredProjects.length, 1),
                       spaceBetween: 20,
                     },
                     768: {
-                      slidesPerView: Math.min(
-                        filteredProjects.length,
-                        2,
-                      ),
+                      slidesPerView: Math.min(filteredProjects.length, 2),
                       spaceBetween: 24,
                     },
                     1024: {
-                      slidesPerView: Math.min(
-                        filteredProjects.length,
-                        2.5,
-                      ),
+                      slidesPerView: Math.min(filteredProjects.length, 2.5),
                       spaceBetween: 24,
                     },
                     1280: {
-                      slidesPerView: Math.min(
-                        filteredProjects.length,
-                        3,
-                      ),
+                      slidesPerView: Math.min(filteredProjects.length, 3),
                       spaceBetween: 30,
                     },
                   }}
@@ -260,35 +248,35 @@ const Projects = () => {
                       key={project.id}
                       className="!h-auto !flex">
                       <div
-                        onMouseEnter={() =>
-                          setHoveredProject(project.id)
-                        }
+                        onMouseEnter={() => setHoveredProject(project.id)}
                         onMouseLeave={() => setHoveredProject(null)}
                         className="group relative w-full h-full flex">
-                        {/* Featured Badge - Simplified */}
+                        
+                        {/* Featured Badge */}
                         {project.featured && (
                           <div className="absolute -top-3 -right-3 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-full shadow-lg">
                             <Star className="w-4 h-4 text-white fill-white" />
                           </div>
                         )}
 
-                        <div className="bg-[#0D1B2A]/50 rounded-2xl overflow-hidden border-2 border-gray-800 hover:border-blue-500/40 transition-all duration-300 w-full flex flex-col">
+                        <div className="bg-[#0D1B2A]/50 rounded-2xl overflow-hidden border-2 border-gray-800 hover:border-blue-500/40 transition-all duration-200 w-full flex flex-col">
+                          
                           {/* Project Image with Overlay */}
                           <div className="relative overflow-hidden aspect-video flex-shrink-0">
                             <Image
                               alt={project.title}
-                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                              className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                               src={project.image}
                               width={600}
                               height={400}
                             />
 
                             {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A] via-[#0D1B2A]/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A] via-[#0D1B2A]/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-200" />
 
-                            {/* Hover Actions - Simplified */}
+                            {/* Hover Actions */}
                             <div
-                              className={`absolute inset-0 flex items-center justify-center gap-4 transition-opacity duration-300 ${
+                              className={`absolute inset-0 flex items-center justify-center gap-4 transition-opacity duration-200 ${
                                 hoveredProject === project.id
                                   ? "opacity-100"
                                   : "opacity-0"
@@ -298,7 +286,7 @@ const Projects = () => {
                                   href={project.liveUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="p-3 bg-blue-500 hover:bg-blue-600 rounded-full shadow-lg transition-all transform hover:scale-110">
+                                  className="p-3 bg-blue-500 hover:bg-blue-600 rounded-full shadow-lg transition-all hover:scale-110 will-change-transform">
                                   <ExternalLink className="w-5 h-5 text-white" />
                                 </a>
                               )}
@@ -307,7 +295,7 @@ const Projects = () => {
                                   href={project.githubUrl}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="p-3 bg-gray-800 hover:bg-gray-700 rounded-full shadow-lg transition-all transform hover:scale-110">
+                                  className="p-3 bg-gray-800 hover:bg-gray-700 rounded-full shadow-lg transition-all hover:scale-110 will-change-transform">
                                   <Github className="w-5 h-5 text-white" />
                                 </a>
                               )}
@@ -336,7 +324,6 @@ const Projects = () => {
                               {project.description}
                             </p>
 
-                            {/* Spacer to push content to bottom */}
                             <div className="flex-grow"></div>
 
                             {/* Technologies */}
@@ -352,8 +339,7 @@ const Projects = () => {
 
                             {/* View Details Link */}
                             <div className="mt-auto">
-                              <Link
-                                href={`/projects/${project.slug}`}>
+                              <Link href={`/projects/${project.slug}`}>
                                 <span className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold text-sm group/link cursor-pointer transition-colors">
                                   View Details
                                   <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
@@ -367,31 +353,22 @@ const Projects = () => {
                   ))}
                 </Swiper>
 
-                {/* Custom Navigation Buttons */}
+                {/* Custom Navigation Buttons - حذف framer-motion */}
                 <div className="flex items-center justify-center gap-6 mt-0 md:mt-8">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="swiper-button-prev-custom w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg">
+                  <button className="swiper-button-prev-custom w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg hover:scale-105 active:scale-95 will-change-transform">
                     <ChevronLeft className="w-6 h-6" />
-                  </motion.button>
+                  </button>
 
                   <Link href="/projects">
-                    <motion.span
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                      className="group flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all cursor-pointer">
+                    <span className="group flex items-center gap-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-shadow cursor-pointer active:scale-95 will-change-transform">
                       See All
                       <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </motion.span>
+                    </span>
                   </Link>
 
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="swiper-button-next-custom w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg">
+                  <button className="swiper-button-next-custom w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg hover:scale-105 active:scale-95 will-change-transform">
                     <ChevronRight className="w-6 h-6" />
-                  </motion.button>
+                  </button>
                 </div>
 
                 {/* Custom Pagination */}
@@ -407,28 +384,23 @@ const Projects = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Stats Section */}
+        {/* Stats Section - حذف whileHover */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.5 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
           className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20">
           {[
             { label: "Projects Completed", value: "50+", icon: Code },
             { label: "Happy Clients", value: "30+", icon: Star },
             { label: "Technologies", value: "15+", icon: Zap },
-            {
-              label: "Years Experience",
-              value: "5+",
-              icon: Sparkles,
-            },
+            { label: "Years Experience", value: "5+", icon: Sparkles },
           ].map((stat, index) => {
             const Icon = stat.icon;
             return (
-              <motion.div
+              <div
                 key={index}
-                whileHover={{ y: -5 }}
-                className="bg-[#0D1B2A]/50 border border-gray-800 rounded-2xl p-6 text-center hover:border-blue-500/40 transition-all">
+                className="bg-[#0D1B2A]/50 border border-gray-800 rounded-2xl p-6 text-center hover:border-blue-500/40 transition-all hover:-translate-y-1 will-change-transform">
                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
@@ -438,7 +410,7 @@ const Projects = () => {
                 <div className="text-sm text-gray-400">
                   {stat.label}
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </motion.div>
@@ -460,7 +432,6 @@ const Projects = () => {
           background: linear-gradient(to right, #3b82f6, #9333ea);
         }
 
-        /* Ensure all slides have equal height */
         .swiper-slide {
           height: auto !important;
           display: flex !important;

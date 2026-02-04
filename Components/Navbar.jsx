@@ -90,7 +90,7 @@ const Navbar = () => {
         x: "-100%",
         transition: {
           type: "tween",
-          duration: 0.25,
+          duration: 0.2,
           ease: "easeInOut",
         },
       },
@@ -98,7 +98,7 @@ const Navbar = () => {
         x: 0,
         transition: {
           type: "tween",
-          duration: 0.25,
+          duration: 0.2,
           ease: "easeInOut",
         },
       },
@@ -112,8 +112,8 @@ const Navbar = () => {
       open: (i) => ({
         opacity: 1,
         transition: {
-          delay: i * 0.04,
-          duration: 0.2,
+          delay: i * 0.03,
+          duration: 0.15,
         },
       }),
     }),
@@ -125,24 +125,22 @@ const Navbar = () => {
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
         className={`
           fixed top-0 left-0 w-full z-50
           flex justify-between items-center
           px-6 md:px-[10vw]
-          transition-all duration-300 ease-in-out
+          transition-all duration-200 ease-in-out
           ${
             scrolled
-              ? "py-4 bg-[#0A0F1C]/95 backdrop-blur-xl border-b border-blue-500/20 shadow-lg shadow-blue-500/5"
+              ? "py-4 bg-[#0A0F1C]/95 border-b border-blue-500/20 shadow-lg shadow-blue-500/5"
               : "py-6 bg-transparent border-b border-transparent"
           }
-        `}>
+        `}
+        style={scrolled ? { backdropFilter: "blur(12px)" } : {}}>
         {/* Logo */}
         <Link href="/">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="flex items-center gap-3 cursor-pointer group">
+          <div className="flex items-center gap-3 cursor-pointer group hover:scale-105 active:scale-95 transition-transform will-change-transform">
             <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-2 rounded-lg">
               <Code2 className="w-6 h-6 text-white" />
             </div>
@@ -154,7 +152,7 @@ const Navbar = () => {
                 Dev
               </span>
             </div>
-          </motion.div>
+          </div>
         </Link>
 
         {/* Desktop Menu */}
@@ -164,12 +162,14 @@ const Navbar = () => {
               const Icon = item.icon;
               const isActive = activeSection === item.id;
               return (
-                <motion.li key={item.id} whileHover={{ y: -2 }}>
+                <li
+                  key={item.id}
+                  className="hover:-translate-y-0.5 transition-transform will-change-transform">
                   <Link href={item.href}>
                     <div
                       className={`
                         group flex items-center gap-2 cursor-pointer relative
-                        transition-colors duration-200
+                        transition-colors duration-150
                         ${
                           isActive
                             ? "text-blue-400"
@@ -184,22 +184,25 @@ const Navbar = () => {
                         <motion.div
                           layoutId="activeIndicator"
                           className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
-                          transition={{ duration: 0.3 }}
+                          transition={{
+                            duration: 0.25,
+                            ease: "easeInOut",
+                          }}
                         />
                       )}
                     </div>
                   </Link>
-                </motion.li>
+                </li>
               );
             })}
           </ul>
 
           {/* Contact Button */}
           <Link href="/contact">
-            <button className="group relative flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-blue-500/20 transition-all active:scale-95">
+            <button className="group relative flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold overflow-hidden cursor-pointer hover:shadow-lg hover:shadow-blue-500/20 transition-shadow active:scale-95 will-change-transform">
               <Mail className="w-4 h-4 relative z-10" />
               <span className="relative z-10">Contact Me</span>
-              <Sparkles className="w-4 h-4 relative z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+              <Sparkles className="w-4 h-4 relative z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-150" />
             </button>
           </Link>
         </nav>
@@ -207,24 +210,24 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <button
           onClick={toggleMenu}
-          className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors active:scale-90 transition-transform duration-150"
+          className="md:hidden relative z-50 w-10 h-10 flex items-center justify-center rounded-lg bg-gray-800/50 border border-gray-700 hover:border-blue-500/50 transition-colors active:scale-90 will-change-transform"
           aria-label="Toggle menu">
           <AnimatePresence mode="wait" initial={false}>
             {menuOpen ? (
               <motion.div
                 key="close"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, rotate: -90 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                exit={{ opacity: 0, rotate: 90 }}
                 transition={{ duration: 0.15 }}>
                 <X className="w-6 h-6 text-blue-400" />
               </motion.div>
             ) : (
               <motion.div
                 key="menu"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
+                initial={{ opacity: 0, rotate: -90 }}
+                animate={{ opacity: 1, rotate: 0 }}
+                exit={{ opacity: 0, rotate: 90 }}
                 transition={{ duration: 0.15 }}>
                 <Menu className="w-6 h-6 text-blue-400" />
               </motion.div>
@@ -233,21 +236,22 @@ const Navbar = () => {
         </button>
       </motion.header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - کاهش blur */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.15 }}
             onClick={closeMenu}
-            className="fixed inset-0 z-40 md:hidden bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-40 md:hidden bg-black/60"
+            style={{ backdropFilter: "blur(4px)" }}
           />
         )}
       </AnimatePresence>
 
-      {/* Mobile Menu Sidebar */}
+      {/* Mobile Menu Sidebar - کاهش blur */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -255,7 +259,8 @@ const Navbar = () => {
             initial="closed"
             animate="open"
             exit="closed"
-            className="fixed top-0 left-0 h-full w-[85vw] max-w-sm z-50 md:hidden bg-[#0D1B2A]/98 backdrop-blur-xl border-r border-blue-500/20 shadow-2xl">
+            className="fixed top-0 left-0 h-full w-[85vw] max-w-sm z-50 md:hidden bg-[#0D1B2A]/98 border-r border-blue-500/20 shadow-2xl"
+            style={{ backdropFilter: "blur(16px)" }}>
             <nav className="relative flex flex-col h-full pt-24 px-6">
               {/* Logo in Sidebar */}
               <div className="flex items-center gap-3 mb-12 pb-6 border-b border-gray-800">
@@ -289,7 +294,7 @@ const Navbar = () => {
                           onClick={closeMenu}
                           className={`
                             flex items-center gap-4 px-4 py-3.5 rounded-xl
-                            cursor-pointer transition-all active:scale-95
+                            cursor-pointer transition-all active:scale-95 will-change-transform
                             ${
                               isActive
                                 ? "bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30"
@@ -322,7 +327,7 @@ const Navbar = () => {
                 <Link href="/contact">
                   <button
                     onClick={closeMenu}
-                    className="w-full flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl font-semibold shadow-lg shadow-blue-500/30 cursor-pointer active:scale-98 transition-transform">
+                    className="w-full flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl font-semibold shadow-lg shadow-blue-500/30 cursor-pointer active:scale-98 transition-transform will-change-transform">
                     <Mail className="w-5 h-5" />
                     Contact Me
                     <Sparkles className="w-5 h-5" />

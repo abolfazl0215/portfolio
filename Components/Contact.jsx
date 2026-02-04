@@ -86,18 +86,19 @@ const Contact = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.06,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 15, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.4,
+        duration: 0.3,
+        ease: "easeOut",
       },
     },
   };
@@ -106,25 +107,25 @@ const Contact = () => {
     <section
       id="contact"
       className="py-20 px-[5vw] lg:px-[10vw] relative overflow-hidden">
-      {/* Simplified Static Background */}
+      {/* بک‌گراند ساده بدون blur */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/3 rounded-full" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/3 rounded-full" />
       </div>
 
       <div className="container mx-auto relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6">
             <Sparkles className="w-4 h-4 text-blue-400" />
             <span className="text-sm text-blue-400 font-medium">
@@ -146,27 +147,26 @@ const Contact = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           className="grid lg:grid-cols-2 gap-12">
           {/* Left Side - Contact Info & Social */}
           <motion.div variants={itemVariants} className="space-y-8">
-            {/* Contact Information */}
+            {/* Contact Information - حذف whileHover از motion.div */}
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
-                <motion.div
+                <div
                   key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.08, duration: 0.4 }}
-                  whileHover={{ x: 5 }}
-                  className="group">
+                  className="group opacity-0 animate-fade-in"
+                  style={{
+                    animationDelay: `${index * 0.08}s`,
+                    animationFillMode: "forwards",
+                  }}>
                   {info.link ? (
                     <a
                       href={info.link}
-                      className="flex items-start gap-4 p-4 rounded-2xl bg-[#0D1B2A]/50 border border-gray-800 hover:border-blue-500/30 transition-all">
+                      className="flex items-start gap-4 p-4 rounded-2xl bg-[#0D1B2A]/50 border border-gray-800 hover:border-blue-500/30 transition-all hover:translate-x-1 will-change-transform">
                       <div
-                        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${info.gradient} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg`}>
+                        className={`w-14 h-14 rounded-xl bg-gradient-to-br ${info.gradient} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg will-change-transform`}>
                         <info.icon className="w-6 h-6 text-white" />
                       </div>
                       <div className="flex-1">
@@ -195,16 +195,16 @@ const Contact = () => {
                       </div>
                     </div>
                   )}
-                </motion.div>
+                </div>
               ))}
             </div>
 
-            {/* Social Links */}
+            {/* Social Links - حذف whileHover */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.4 }}
+              transition={{ delay: 0.2, duration: 0.3 }}
               className="p-6 rounded-2xl bg-[#0D1B2A]/50 border border-gray-800">
               <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                 <Sparkles className="w-5 h-5 text-blue-400" />
@@ -212,24 +212,20 @@ const Contact = () => {
               </h3>
               <div className="space-y-3">
                 {socialLinks.map((social, index) => (
-                  <motion.a
+                  <a
                     key={index}
                     href={social.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      delay: 0.4 + index * 0.05,
-                      duration: 0.3,
-                    }}
-                    whileHover={{ x: 5 }}
-                    onHoverStart={() => setHoveredSocial(index)}
-                    onHoverEnd={() => setHoveredSocial(null)}
-                    className="group flex items-center gap-4 p-4 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-blue-500/30 transition-all cursor-pointer">
+                    onMouseEnter={() => setHoveredSocial(index)}
+                    onMouseLeave={() => setHoveredSocial(null)}
+                    className="group flex items-center gap-4 p-4 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-blue-500/30 transition-all cursor-pointer hover:translate-x-1 will-change-transform opacity-0 animate-fade-in"
+                    style={{
+                      animationDelay: `${0.3 + index * 0.05}s`,
+                      animationFillMode: "forwards",
+                    }}>
                     <div
-                      className={`w-12 h-12 rounded-lg bg-gradient-to-br ${social.color} flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg`}>
+                      className={`w-12 h-12 rounded-lg bg-gradient-to-br ${social.color} flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg will-change-transform`}>
                       <social.icon className="w-5 h-5 text-white" />
                     </div>
                     <div className="flex-1">
@@ -241,30 +237,27 @@ const Contact = () => {
                       </div>
                     </div>
                     <ArrowRight
-                      className={`w-5 h-5 text-gray-600 ${social.hoverColor} transition-colors ${hoveredSocial === index ? "translate-x-1" : ""}`}
+                      className={`w-5 h-5 text-gray-600 ${social.hoverColor} transition-all ${hoveredSocial === index ? "translate-x-1" : ""}`}
                     />
-                  </motion.a>
+                  </a>
                 ))}
               </div>
             </motion.div>
 
-            {/* Quick Link to Full Contact Page */}
+            {/* Quick Link - حذف whileHover و whileTap */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.5, duration: 0.4 }}>
+              transition={{ delay: 0.3, duration: 0.3 }}>
               <Link href="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-xl hover:border-blue-500/40 transition-all group">
+                <button className="w-full p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-xl hover:border-blue-500/40 transition-all group active:scale-98 will-change-transform">
                   <div className="flex items-center justify-center gap-2 text-blue-400 font-semibold">
                     <MessageSquare className="w-5 h-5" />
                     <span>View Full Contact Page</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </div>
-                </motion.button>
+                </button>
               </Link>
             </motion.div>
           </motion.div>
@@ -324,15 +317,13 @@ const Contact = () => {
                     />
                   </div>
 
-                  <motion.button
+                  <button
                     type="submit"
                     disabled={isSubmitting}
-                    whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
-                    whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
-                    className={`w-full py-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
+                    className={`w-full py-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 will-change-transform ${
                       isSubmitting
                         ? "bg-gray-700 cursor-not-allowed"
-                        : "bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/50"
+                        : "bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/50 active:scale-98"
                     }`}>
                     {isSubmitting ? (
                       <>
@@ -345,13 +336,13 @@ const Contact = () => {
                         Send Message
                       </>
                     )}
-                  </motion.button>
+                  </button>
                 </form>
               ) : (
                 <motion.div
                   initial={{ scale: 0.9, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.25 }}
                   className="text-center py-12">
                   <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle className="w-10 h-10 text-green-400" />
@@ -369,6 +360,23 @@ const Contact = () => {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* اضافه کردن keyframes برای fade-in */}
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateX(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out;
+        }
+      `}</style>
     </section>
   );
 };

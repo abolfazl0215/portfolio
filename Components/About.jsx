@@ -75,19 +75,20 @@ const About = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
+        staggerChildren: 0.06,
+        delayChildren: 0.05,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 15, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.4,
+        duration: 0.3,
+        ease: "easeOut",
       },
     },
   };
@@ -96,27 +97,30 @@ const About = () => {
     <section
       id="about"
       className="relative bg-[#0A0F1C] py-20 px-[5vw] lg:px-[10vw] overflow-hidden">
-      {/* Simplified Static Background */}
+      {/* بک‌گراند ساده بدون blur سنگین */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 right-0 w-96 h-96 bg-blue-500/3 rounded-full" />
+        <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-purple-500/3 rounded-full" />
       </div>
 
       <div className="container mx-auto relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left - Image Section */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.4 }}
             className="hidden md:block relative order-2 lg:order-1">
             <div className="relative max-w-md mx-auto lg:mx-0">
-              {/* Static Glowing Background */}
-              <div className="absolute -inset-4 bg-gradient-to-br from-blue-500/15 via-purple-500/15 to-blue-500/15 rounded-3xl blur-2xl opacity-50" />
+              {/* گلو ساده با inline blur */}
+              <div
+                className="absolute -inset-4 bg-gradient-to-br from-blue-500/12 via-purple-500/12 to-blue-500/12 rounded-3xl opacity-40"
+                style={{ filter: "blur(50px)" }}
+              />
 
-              {/* Image Container - Removed hover scale */}
-              <div className="relative rounded-3xl overflow-hidden transition-all duration-300">
+              {/* Image Container */}
+              <div className="relative rounded-3xl overflow-hidden">
                 <Image
                   src="/images/me32.png"
                   width={1000}
@@ -127,27 +131,26 @@ const About = () => {
                 />
               </div>
 
-              {/* Floating Stats Cards - Simplified */}
+              {/* Floating Stats Cards - بدون backdrop-filter */}
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
                 return (
                   <motion.div
                     key={stat.label}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{
-                      delay: 0.3 + index * 0.1,
-                      duration: 0.4,
+                      delay: 0.2 + index * 0.08,
+                      duration: 0.3,
                     }}
-                    whileHover={{ scale: 1.05 }}
                     className={`absolute ${
                       index === 0
                         ? "-top-6 -right-6"
                         : index === 1
                           ? "top-1/2 -left-6"
                           : "bottom-6 -right-6"
-                    } bg-[#0D1B2A]/80 border border-blue-500/30 rounded-2xl p-4 shadow-xl`}>
+                    } bg-[#0D1B2A] border border-blue-500/30 rounded-2xl p-4 shadow-xl hover:scale-105 transition-transform will-change-transform cursor-default`}>
                     <div className="flex items-center gap-3">
                       <div
                         className={`w-12 h-12 bg-gradient-to-br ${stat.color} rounded-xl flex items-center justify-center`}>
@@ -173,7 +176,7 @@ const About = () => {
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             className="order-1 lg:order-2">
             {/* Section Badge */}
             <motion.div
@@ -205,27 +208,24 @@ const About = () => {
               technologies.
             </motion.p>
 
-            {/* Highlights - Simplified */}
+            {/* Highlights */}
             <motion.div variants={itemVariants} className="mb-10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {highlights.map((highlight, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      delay: 0.4 + index * 0.05,
-                      duration: 0.3,
-                    }}
-                    className="flex items-start gap-3">
+                    className="flex items-start gap-3 opacity-0 animate-fade-in"
+                    style={{
+                      animationDelay: `${0.3 + index * 0.05}s`,
+                      animationFillMode: "forwards",
+                    }}>
                     <div className="mt-1">
                       <CheckCircle2 className="w-5 h-5 text-blue-400" />
                     </div>
                     <span className="text-gray-300 text-sm">
                       {highlight}
                     </span>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </motion.div>
@@ -243,19 +243,15 @@ const About = () => {
 
               <div className="flex flex-wrap justify-center lg:justify-start gap-4">
                 {skills.map((skill, index) => (
-                  <motion.div
+                  <div
                     key={skill.name}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      delay: 0.5 + index * 0.05,
-                      duration: 0.3,
-                    }}
-                    whileHover={{ scale: 1.1, y: -5 }}
-                    className="group relative">
+                    className="group relative opacity-0 animate-fade-in"
+                    style={{
+                      animationDelay: `${0.4 + index * 0.05}s`,
+                      animationFillMode: "forwards",
+                    }}>
                     <div
-                      className={`w-12 h-12 sm:w-12 sm:h-12 bg-gradient-to-br ${skill.color} rounded-xl flex items-center justify-center p-2.5 sm:p-3 border border-gray-800 hover:border-blue-500/50 transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl`}>
+                      className={`w-12 h-12 sm:w-12 sm:h-12 bg-gradient-to-br ${skill.color} rounded-xl flex items-center justify-center p-2.5 sm:p-3 border border-gray-800 hover:border-blue-500/50 transition-all duration-200 cursor-pointer shadow-lg hover:shadow-xl hover:scale-110 hover:-translate-y-1 will-change-transform`}>
                       <Image
                         src={skill.icon}
                         width={100}
@@ -270,36 +266,49 @@ const About = () => {
                         {skill.name}
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </motion.div>
 
-            {/* CTA Buttons - Simplified */}
+            {/* CTA Buttons - حذف framer-motion animations */}
             <motion.div
               variants={itemVariants}
               className="mt-10 flex flex-wrap gap-4">
-              <motion.a
+              <a
                 href="#projects"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="group flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all">
+                className="group flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-shadow will-change-transform active:scale-95">
                 View My Work
                 <Zap className="w-5 h-5" />
-              </motion.a>
+              </a>
 
-              <motion.a
+              <a
                 href="#contact"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-8 py-3 bg-gray-800/50 border border-gray-700 rounded-full font-semibold hover:border-blue-500/50 transition-all">
+                className="flex items-center gap-2 px-8 py-3 bg-gray-800/50 border border-gray-700 rounded-full font-semibold hover:border-blue-500/50 transition-colors will-change-transform active:scale-95">
                 Let's Talk
                 <Sparkles className="w-5 h-5" />
-              </motion.a>
+              </a>
             </motion.div>
           </motion.div>
         </div>
       </div>
+
+      {/* اضافه کردن keyframes برای fade-in */}
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.3s ease-out;
+        }
+      `}</style>
     </section>
   );
 };

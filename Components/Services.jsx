@@ -128,18 +128,19 @@ const Services = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
+        staggerChildren: 0.06,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 15, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.4,
+        duration: 0.3,
+        ease: "easeOut",
       },
     },
   };
@@ -148,25 +149,25 @@ const Services = () => {
     <section
       id="services"
       className="py-20 grid-bg px-[5vw] lg:px-[10vw] relative overflow-hidden">
-      {/* Simplified Static Background */}
+      {/* بک‌گراند ساده بدون blur */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/3 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/3 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/2 rounded-full" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/2 rounded-full" />
       </div>
 
       <div className="container mx-auto relative z-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-16">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 }}
+            transition={{ duration: 0.3, delay: 0.1 }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6">
             <Sparkles className="w-4 h-4 text-blue-400" />
             <span className="text-sm text-blue-400 font-medium">
@@ -188,7 +189,7 @@ const Services = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           className="grid lg:grid-cols-2 gap-12">
           {services.map((service) => (
             <motion.div
@@ -197,11 +198,9 @@ const Services = () => {
               className="space-y-6">
               {/* Service Header */}
               <div className="text-center lg:text-left">
-                <motion.div
-                  whileHover={{ scale: 1.05 }}
-                  className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-4">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl mb-4 hover:scale-105 transition-transform will-change-transform">
                   <service.iconComponent className="w-8 h-8 text-white" />
-                </motion.div>
+                </div>
                 <h3 className="text-2xl lg:text-3xl font-bold mb-2">
                   {service.title}
                 </h3>
@@ -211,22 +210,18 @@ const Services = () => {
               {/* Pricing Cards */}
               <div className="grid gap-4">
                 {service.plans.map((plan, index) => (
-                  <motion.div
+                  <div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.1 }}
-                    onHoverStart={() =>
+                    onMouseEnter={() =>
                       setHoveredCard(`${service.id}-${index}`)
                     }
-                    onHoverEnd={() => setHoveredCard(null)}
-                    className={`relative p-6 rounded-2xl border-2 transition-all cursor-pointer group ${
+                    onMouseLeave={() => setHoveredCard(null)}
+                    className={`relative p-6 rounded-2xl border-2 transition-all duration-200 cursor-pointer group ${
                       plan.popular
                         ? "bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-blue-500/10 border-blue-500/50 shadow-lg shadow-blue-500/20"
                         : "bg-[#0D1B2A]/50 border-gray-800 hover:border-blue-500/30"
                     }`}>
-                    {/* Popular Badge - Simplified */}
+                    {/* Popular Badge */}
                     {plan.popular && (
                       <div className="absolute -top-3 -right-3 px-3 py-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-xs font-bold flex items-center gap-1">
                         <Zap className="w-3 h-3" />
@@ -245,21 +240,17 @@ const Services = () => {
                           </span>
                         </div>
                       </div>
-                      <motion.div
-                        animate={{
-                          scale:
-                            hoveredCard === `${service.id}-${index}`
-                              ? 1.05
-                              : 1,
-                        }}
-                        transition={{ duration: 0.2 }}
-                        className={`p-2 rounded-lg ${
+
+                      {/* آیکن با scale ساده */}
+                      <div
+                        className={`p-2 rounded-lg transition-transform duration-150 ${
                           plan.popular
                             ? "bg-blue-500/20"
                             : "bg-gray-800/50"
-                        }`}>
+                        } ${hoveredCard === `${service.id}-${index}` ? "scale-105" : "scale-100"}`}
+                        style={{ willChange: "transform" }}>
                         <Bot className="w-5 h-5 text-blue-400" />
-                      </motion.div>
+                      </div>
                     </div>
 
                     <ul className="space-y-3">
@@ -284,15 +275,15 @@ const Services = () => {
                       ))}
                     </ul>
 
-                    {/* Simplified Hover Effect Border */}
+                    {/* Hover Effect - ساده‌تر */}
                     <div
-                      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                      className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none"
                       style={{
                         background:
-                          "linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.08), transparent)",
+                          "linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent)",
                       }}
                     />
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </motion.div>
@@ -301,22 +292,19 @@ const Services = () => {
 
         {/* CTA Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.4 }}
+          transition={{ delay: 0.2, duration: 0.3 }}
           className="mt-16 text-center">
           <p className="text-gray-400 mb-6">
             Need a custom solution? Let's discuss your project
             requirements.
           </p>
           <Link href="/contact">
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-shadow">
+            <button className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-shadow active:scale-95 will-change-transform">
               Get in Touch
-            </motion.button>
+            </button>
           </Link>
         </motion.div>
       </div>

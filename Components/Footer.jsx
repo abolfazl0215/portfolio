@@ -85,7 +85,7 @@ const Footer = () => {
       visible: {
         opacity: 1,
         transition: {
-          staggerChildren: 0.05,
+          staggerChildren: 0.04,
         },
       },
     }),
@@ -94,12 +94,13 @@ const Footer = () => {
 
   const itemVariants = useMemo(
     () => ({
-      hidden: { y: 10, opacity: 0 },
+      hidden: { y: 8, opacity: 0 },
       visible: {
         y: 0,
         opacity: 1,
         transition: {
-          duration: 0.3,
+          duration: 0.25,
+          ease: "easeOut",
         },
       },
     }),
@@ -109,15 +110,15 @@ const Footer = () => {
   return (
     <footer className="relative py-12 px-[5vw] lg:px-[10vw] border-t border-gray-800 overflow-hidden">
       <div className="container mx-auto relative z-10">
-        {/* CTA Section */}
+        {/* CTA Section - حذف backdrop-blur */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.3 }}
           className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 rounded-3xl p-12 text-center mb-16">
           <div className="relative z-10">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full mb-6">
               <Sparkles className="w-4 h-4" />
               <span className="text-sm font-medium">
                 Ready to Start?
@@ -134,13 +135,13 @@ const Footer = () => {
 
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/quote">
-                <button className="px-8 py-3 bg-white text-blue-600 rounded-full font-bold hover:shadow-lg transition-all active:scale-95 flex items-center gap-2">
+                <button className="px-8 py-3 bg-white text-blue-600 rounded-full font-bold hover:shadow-lg transition-shadow active:scale-95 flex items-center gap-2 will-change-transform">
                   <Zap className="w-5 h-5" />
                   Get Free Quote
                 </button>
               </Link>
               <Link href="/contact">
-                <button className="px-8 py-3 bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-full font-bold hover:bg-white/20 transition-all active:scale-95">
+                <button className="px-8 py-3 bg-white/10 border-2 border-white/20 rounded-full font-bold hover:bg-white/20 transition-all active:scale-95 will-change-transform">
                   Contact Me
                 </button>
               </Link>
@@ -153,7 +154,7 @@ const Footer = () => {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand Column */}
           <motion.div
@@ -179,7 +180,7 @@ const Footer = () => {
                   href={social.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-10 h-10 bg-gray-800/50 rounded-lg flex items-center justify-center transition-all hover:scale-110 active:scale-95 ${social.color} border border-gray-700 hover:border-blue-500/30`}>
+                  className={`w-10 h-10 bg-gray-800/50 rounded-lg flex items-center justify-center transition-all hover:scale-110 active:scale-95 ${social.color} border border-gray-700 hover:border-blue-500/30 will-change-transform`}>
                   <social.icon className="w-4 h-4" />
                 </a>
               ))}
@@ -256,10 +257,10 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.15, duration: 0.25 }}
           className="pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-gray-400 text-sm flex items-center gap-2">
@@ -285,8 +286,8 @@ const Footer = () => {
             {/* Scroll to Top Button */}
             <button
               onClick={scrollToTop}
-              className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-110 active:scale-90"
-              title="Back to top">
+              className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-blue-500/50 transition-all hover:scale-110 active:scale-90 will-change-transform"
+              aria-label="Back to top">
               <ArrowUp className="w-5 h-5 text-white" />
             </button>
           </div>
@@ -297,7 +298,7 @@ const Footer = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.2, duration: 0.25 }}
           className="mt-8 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-800/30 border border-gray-700/50 rounded-full text-xs text-gray-500">
             <Code className="w-3 h-3" />

@@ -15,24 +15,26 @@ import {
 import Image from "next/image";
 
 const HeroSection = () => {
+  // ساده‌ترین انیمیشن‌ها با کمترین overhead
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1,
+        staggerChildren: 0.1,
+        delayChildren: 0.05,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 10, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.4,
+        duration: 0.3,
+        ease: "easeOut",
       },
     },
   };
@@ -62,10 +64,10 @@ const HeroSection = () => {
     <section
       id="home"
       className="relative grid-bg min-h-screen bg-[#0A0F1C] pt-28 md:pt-40 pb-20 px-[5vw] lg:px-[10vw] overflow-hidden">
-      {/* Simplified Background Elements - Static */}
+      {/* بک‌گراند ساده بدون blur - فقط gradient */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -right-48 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 -left-48 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 -right-48 w-96 h-96 bg-blue-500/5 rounded-full" />
+        <div className="absolute bottom-1/4 -left-48 w-96 h-96 bg-purple-500/3 rounded-full" />
       </div>
 
       <div className="container mx-auto relative z-10">
@@ -76,7 +78,7 @@ const HeroSection = () => {
             initial="hidden"
             animate="visible"
             className="order-2 lg:order-1 text-center lg:text-left">
-            {/* Welcome Badge */}
+            {/* Welcome Badge - حذف backdrop-filter */}
             <motion.div
               variants={itemVariants}
               className="inline-block">
@@ -120,65 +122,61 @@ const HeroSection = () => {
               design.
             </motion.p>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - استفاده از transform به جای scale */}
             <motion.div
               variants={itemVariants}
               className="flex flex-wrap gap-4 mb-10 justify-center lg:justify-start">
               <Link href="#projects">
-                <motion.button
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  className="group flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all">
+                <button className="group flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-shadow will-change-transform active:scale-95">
                   <Code2 className="w-5 h-5" />
                   My Projects
-                </motion.button>
+                </button>
               </Link>
 
-              <motion.a
+              <a
                 href="/cv.pdf"
                 download
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-8 py-3 bg-gray-800/50 border border-gray-700 rounded-full font-semibold hover:border-blue-500/50 transition-all">
+                className="flex items-center gap-2 px-8 py-3 bg-gray-800/50 border border-gray-700 rounded-full font-semibold hover:border-blue-500/50 transition-colors will-change-transform active:scale-95">
                 <Download className="w-5 h-5" />
                 Download CV
-              </motion.a>
+              </a>
             </motion.div>
 
-            {/* Social Links - Simplified Animation */}
+            {/* Social Links - ساده‌سازی انیمیشن */}
             <motion.div
               variants={itemVariants}
               className="flex gap-4 justify-center lg:justify-start">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
                 return (
-                  <motion.a
+                  <a
                     key={social.name}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className={`w-12 h-12 rounded-full bg-gradient-to-br ${social.color} flex items-center justify-center hover:shadow-lg transition-all`}>
+                    className={`w-12 h-12 rounded-full bg-gradient-to-br ${social.color} flex items-center justify-center hover:shadow-lg transition-shadow will-change-transform active:scale-90`}>
                     <Icon className="w-6 h-6 text-white" />
-                  </motion.a>
+                  </a>
                 );
               })}
             </motion.div>
           </motion.div>
 
-          {/* Right Image - Simplified */}
+          {/* Right Image - بدون scale animation */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
             className="order-1 lg:order-2 relative">
             <div className="relative max-w-md mx-auto">
-              {/* Static Glowing Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 via-purple-500/20 to-blue-500/20 rounded-3xl blur-3xl opacity-40" />
+              {/* گلو کم‌رنگ‌تر و بدون blur سنگین */}
+              <div
+                className="absolute inset-0 bg-gradient-to-br from-blue-500/15 via-purple-500/15 to-blue-500/15 rounded-3xl opacity-30"
+                style={{ filter: "blur(60px)" }}
+              />
 
-              {/* Image Container - Removed hover scale */}
-              <div className="relative rounded-3xl transition-all duration-300 w-4/5 mx-auto">
+              {/* Image Container */}
+              <div className="relative rounded-3xl w-4/5 mx-auto">
                 <Image
                   src="/images/me5.png"
                   alt="Abolfazl Mokhtari - Web Developer"
@@ -190,12 +188,12 @@ const HeroSection = () => {
                 />
               </div>
 
-              {/* Floating Badges - Simplified Animation */}
+              {/* Floating Badge 1 - حذف backdrop-filter و blur */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6, duration: 0.5 }}
-                className="hidden md:block absolute -left-4 top-1/4 bg-[#0D1B2A]/80 border border-blue-500/30 rounded-2xl p-4 shadow-xl">
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.5, duration: 0.4 }}
+                className="hidden md:block absolute -left-4 top-1/4 bg-[#0D1B2A] border border-blue-500/30 rounded-2xl p-4 shadow-xl">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
                     <Code2 className="w-6 h-6 text-white" />
@@ -211,12 +209,12 @@ const HeroSection = () => {
                 </div>
               </motion.div>
 
-              {/* Projects Badge - Simplified Animation */}
+              {/* Floating Badge 2 - حذف backdrop-filter و blur */}
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.5 }}
-                className="hidden md:block absolute -right-4 bottom-1/4 bg-[#0D1B2A]/80 border border-purple-500/30 rounded-2xl p-4 shadow-xl">
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.6, duration: 0.4 }}
+                className="hidden md:block absolute -right-4 bottom-1/4 bg-[#0D1B2A] border border-purple-500/30 rounded-2xl p-4 shadow-xl">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-600 rounded-xl flex items-center justify-center">
                     <Zap className="w-6 h-6 text-white" />
@@ -234,11 +232,11 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll Down Indicator - Simplified */}
+      {/* Scroll Indicator - ساده‌ترین انیمیشن */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.5 }}
+        transition={{ delay: 0.8, duration: 0.4 }}
         className="hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2">
         <a
           href="#about"
