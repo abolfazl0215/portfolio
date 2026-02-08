@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -19,144 +19,46 @@ import {
   Star,
   ArrowRight,
 } from "lucide-react";
+import useProjectsStore from "../../../stores/ProjectsStore";
 
-// Sample project data - you should get this from props or API
-const projectData = {
-  id: 1,
-  slug: "e-commerce-platform",
-  title: "E-Commerce Platform",
-  description:
-    "A modern, responsive online store with advanced features including real-time inventory, secure payment processing, and comprehensive admin dashboard.",
-  fullDescription: `This platform is a complete and advanced online store developed using the latest web technologies. The main goal of this project was to create a smooth and secure shopping experience for users and a powerful management panel for sellers.
-
-The project includes a product management system, advanced shopping cart, secure payment processing, and order tracking system. The admin dashboard is fully designed and provides complete store management capabilities.`,
-  tag: "Website",
-  category: "web",
-  image:
-    "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-  images: [
-    "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-  ],
-  technologies: [
-    "Next.js 14",
-    "Tailwind CSS",
-    "Stripe",
-    "PostgreSQL",
-    "Prisma",
-    "Redis",
-    "Framer Motion",
-    "TypeScript",
-  ],
-  features: [
-    "Advanced authentication system with NextAuth",
-    "Secure payment processing with Stripe",
-    "Real-time product inventory management",
-    "Complete admin dashboard with analytics",
-    "Advanced search and filter system",
-    "User panel with order history",
-    "Reviews and rating system",
-    "SEO optimization and high performance",
-  ],
-  liveUrl: "https://example.com",
-  githubUrl: "https://github.com/example",
-  duration: "3 months",
-  client: "Tech Startup",
-  date: "January 2024",
-};
-
-// All projects for related projects section
-const allProjects = [
-  {
-    id: 1,
-    slug: "e-commerce-platform",
-    title: "E-Commerce Platform",
-    description:
-      "A modern, responsive online store with advanced features",
-    tag: "Website",
-    category: "web",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Next.js", "Tailwind", "Stripe"],
-    featured: true,
-  },
-  {
-    id: 2,
-    slug: "corporate-website",
-    title: "Corporate Website",
-    description: "Professional business website with elegant design",
-    tag: "Website",
-    category: "web",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["React", "GSAP", "Node.js"],
-    featured: false,
-  },
-  {
-    id: 3,
-    slug: "trading-bot",
-    title: "Advanced Trading Bot",
-    description: "Intelligent Telegram bot for automated trading",
-    tag: "Telegram Bot",
-    category: "telegram",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Python", "Redis", "PostgreSQL"],
-    featured: true,
-  },
-  {
-    id: 4,
-    slug: "customer-support-bot",
-    title: "Customer Support Bot",
-    description:
-      "AI-powered support bot with natural language processing",
-    tag: "Telegram Bot",
-    category: "telegram",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Node.js", "OpenAI", "MongoDB"],
-    featured: false,
-  },
-  {
-    id: 5,
-    slug: "saas-dashboard",
-    title: "SaaS Dashboard",
-    description:
-      "Comprehensive analytics dashboard with real-time data visualization",
-    tag: "Web Application",
-    category: "web",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["React", "D3.js", "Firebase"],
-    featured: true,
-  },
-  {
-    id: 6,
-    slug: "community-bot",
-    title: "Community Management Bot",
-    description:
-      "Powerful moderation bot with auto-moderation features",
-    tag: "Telegram Bot",
-    category: "telegram",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Python", "Redis", "Docker"],
-    featured: false,
-  },
-];
-
-// Function to get 3 random related projects (excluding current project)
-const getRelatedProjects = (currentProjectId) => {
-  const otherProjects = allProjects.filter(
-    (p) => p.id !== currentProjectId,
-  );
-  const shuffled = [...otherProjects].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, 3);
-};
-
-const ProjectDetailPage = () => {
+const ProjectDetailPage = ({ params }) => {
+  // Get slug from params
+  const { slug } = use(params);
   const [selectedImage, setSelectedImage] = useState(0);
+
+  // Get project data from Zustand store
+  const getProjectBySlug = useProjectsStore(
+    (state) => state.getProjectBySlug,
+  );
+  const getRelatedProjects = useProjectsStore(
+    (state) => state.getRelatedProjects,
+  );
+
+  const projectData = getProjectBySlug(slug);
+
+  // If project not found
+  if (!projectData) {
+    return (
+      <div className="min-h-screen bg-[#0A0F1C] flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-white mb-4">
+            Project Not Found
+          </h1>
+          <p className="text-gray-400 mb-8">
+            The project you're looking for doesn't exist.
+          </p>
+          <Link href="/#projects">
+            <span className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all cursor-pointer">
+              <ArrowLeft className="w-5 h-5" />
+              Back to Projects
+            </span>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  const relatedProjects = getRelatedProjects(projectData.id, 3);
 
   return (
     <div className="min-h-screen bg-[#0A0F1C] relative overflow-hidden">
@@ -249,7 +151,7 @@ const ProjectDetailPage = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4 mt-8">
-            {projectData.liveUrl && (
+            {projectData.liveUrl && projectData.liveUrl !== "#" && (
               <a
                 href={projectData.liveUrl}
                 target="_blank"
@@ -263,20 +165,21 @@ const ProjectDetailPage = () => {
                 </motion.button>
               </a>
             )}
-            {projectData.githubUrl && (
-              <a
-                href={projectData.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="flex items-center gap-2 px-6 py-3 bg-gray-800/50 border border-gray-700 rounded-full font-semibold hover:border-blue-500/50 transition-all">
-                  <Github className="w-5 h-5" />
-                  Source Code
-                </motion.button>
-              </a>
-            )}
+            {projectData.githubUrl &&
+              projectData.githubUrl !== "#" && (
+                <a
+                  href={projectData.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center gap-2 px-6 py-3 bg-gray-800/50 border border-gray-700 rounded-full font-semibold hover:border-blue-500/50 transition-all">
+                    <Github className="w-5 h-5" />
+                    Source Code
+                  </motion.button>
+                </a>
+              )}
           </div>
         </motion.div>
 
@@ -299,26 +202,28 @@ const ProjectDetailPage = () => {
               </div>
 
               {/* Thumbnail Gallery */}
-              <div className="grid grid-cols-3 gap-4">
-                {projectData.images.map((img, index) => (
-                  <motion.div
-                    key={index}
-                    whileHover={{ scale: 1.05 }}
-                    onClick={() => setSelectedImage(index)}
-                    className={`relative rounded-lg overflow-hidden cursor-pointer aspect-video border-2 transition-all ${
-                      selectedImage === index
-                        ? "border-blue-500 ring-2 ring-blue-500/50"
-                        : "border-gray-800 hover:border-blue-500/50"
-                    }`}>
-                    <Image
-                      src={img}
-                      alt={`Image ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </motion.div>
-                ))}
-              </div>
+              {projectData.images.length > 1 && (
+                <div className="grid grid-cols-3 gap-4">
+                  {projectData.images.map((img, index) => (
+                    <motion.div
+                      key={index}
+                      whileHover={{ scale: 1.05 }}
+                      onClick={() => setSelectedImage(index)}
+                      className={`relative rounded-lg overflow-hidden cursor-pointer aspect-video border-2 transition-all ${
+                        selectedImage === index
+                          ? "border-blue-500 ring-2 ring-blue-500/50"
+                          : "border-gray-800 hover:border-blue-500/50"
+                      }`}>
+                      <Image
+                        src={img}
+                        alt={`Image ${index + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              )}
             </motion.div>
 
             {/* Project Description */}
@@ -419,18 +324,18 @@ const ProjectDetailPage = () => {
         </div>
 
         {/* Related Projects */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mt-20">
-          <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
-            Related Projects
-          </h2>
+        {relatedProjects.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mt-20">
+            <h2 className="text-3xl font-bold mb-8 text-center bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent">
+              Related Projects
+            </h2>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {getRelatedProjects(projectData.id).map(
-              (project, index) => (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {relatedProjects.map((project, index) => (
                 <motion.div
                   key={project.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -499,23 +404,23 @@ const ProjectDetailPage = () => {
                     </div>
                   </Link>
                 </motion.div>
-              ),
-            )}
-          </div>
+              ))}
+            </div>
 
-          {/* View All Projects Link */}
-          <div className="text-center mt-12">
-            <Link href="/#projects">
-              <motion.span
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all cursor-pointer group">
-                View All Projects
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </motion.span>
-            </Link>
-          </div>
-        </motion.div>
+            {/* View All Projects Link */}
+            <div className="text-center mt-12">
+              <Link href="/#projects">
+                <motion.span
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all cursor-pointer group">
+                  View All Projects
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </motion.span>
+              </Link>
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   );

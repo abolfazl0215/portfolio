@@ -48,31 +48,31 @@ const Footer = () => {
       {
         icon: MessageSquare,
         name: "Telegram",
-        link: "https://t.me/yourusername",
+        link: "https://t.me/pounes_support",
         color: "hover:text-blue-400",
       },
       {
         icon: Phone,
         name: "WhatsApp",
-        link: "https://wa.me/374XXXXXXXXX",
+        link: "https://wa.me/989215193594",
         color: "hover:text-green-400",
       },
       {
         icon: Instagram,
         name: "Instagram",
-        link: "https://instagram.com/yourusername",
+        link: "https://instagram.com/abolfazl_mokhtari_",
         color: "hover:text-pink-400",
       },
       {
         icon: Linkedin,
         name: "LinkedIn",
-        link: "https://linkedin.com/in/yourusername",
+        link: "https://linkedin.com/in/abolfazl-mokhtari",
         color: "hover:text-blue-500",
       },
       {
         icon: Github,
         name: "GitHub",
-        link: "https://github.com/yourusername",
+        link: "https://github.com/abolfazl0215",
         color: "hover:text-gray-400",
       },
     ],
@@ -236,15 +236,15 @@ const Footer = () => {
                 className="flex items-start gap-3 text-gray-400 hover:text-blue-400 transition-colors text-sm group">
                 <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <span className="group-hover:translate-x-1 transition-transform">
-                  your.email@example.com
+                  abolfazl021mokhtari@gmail.com
                 </span>
               </a>
               <a
-                href="tel:+374XXXXXXXXX"
+                href="tel:+37477144594"
                 className="flex items-start gap-3 text-gray-400 hover:text-blue-400 transition-colors text-sm group">
                 <Phone className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <span className="group-hover:translate-x-1 transition-transform">
-                  +374 XX XXX XXX
+                  +374 77 144 594
                 </span>
               </a>
               <div className="flex items-start gap-3 text-gray-400 text-sm">
@@ -267,7 +267,7 @@ const Footer = () => {
               © {new Date().getFullYear()} All Rights Reserved. Made
               with
               <Heart className="w-4 h-4 text-red-500 fill-red-500" />
-              by YourName
+              by Abolfazl
             </div>
 
             <div className="flex items-center gap-6">

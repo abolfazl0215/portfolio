@@ -32,16 +32,16 @@ const Contact = () => {
     {
       icon: Phone,
       title: "Phone",
-      value: "+374 XX XXX XXX",
+      value: "+374 77 144 594",
       gradient: "from-purple-500 to-pink-500",
-      link: "tel:+374XXXXXXXXX",
+      link: "tel:+37477144594",
     },
     {
       icon: Mail,
       title: "Email",
-      value: "your.email@example.com",
+      value: "abolfazl021mokhtari@gmail.com",
       gradient: "from-orange-500 to-red-500",
-      link: "mailto:your.email@example.com",
+      link: "mailto:abolfazl021mokhtari@gmail.com",
     },
   ];
 
@@ -49,16 +49,16 @@ const Contact = () => {
     {
       icon: MessageSquare,
       name: "Telegram",
-      username: "@yourusername",
-      link: "https://t.me/yourusername",
+      username: "@pounes_support",
+      link: "https://t.me/pounes_support",
       color: "from-blue-400 to-blue-600",
       hoverColor: "group-hover:text-blue-400",
     },
     {
       icon: Phone,
       name: "WhatsApp",
-      username: "+374 XX XXX XXX",
-      link: "https://wa.me/374XXXXXXXXX",
+      username: "+98 921 51 93 594",
+      link: "https://wa.me/989215193594",
       color: "from-green-400 to-green-600",
       hoverColor: "group-hover:text-green-400",
     },
@@ -251,7 +251,7 @@ const Contact = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.3 }}>
               <Link href="/contact">
-                <button className="w-full p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-xl hover:border-blue-500/40 transition-all group active:scale-98 will-change-transform">
+                <button className="w-full p-4 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-xl hover:border-blue-500/40 transition-all group active:scale-98 will-change-transform cursor-pointer">
                   <div className="flex items-center justify-center gap-2 text-blue-400 font-semibold">
                     <MessageSquare className="w-5 h-5" />
                     <span>View Full Contact Page</span>
@@ -320,7 +320,7 @@ const Contact = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`w-full py-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 will-change-transform ${
+                    className={`w-full py-4 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 will-change-transform cursor-pointer ${
                       isSubmitting
                         ? "bg-gray-700 cursor-not-allowed"
                         : "bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/50 active:scale-98"

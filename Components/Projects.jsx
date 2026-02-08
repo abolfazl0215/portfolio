@@ -19,101 +19,12 @@ import {
   Zap,
   Star,
 } from "lucide-react";
+import useProjectsStore from "../stores/ProjectsStore";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-
-const projects = [
-  {
-    id: 1,
-    slug: "e-commerce-platform",
-    title: "E-Commerce Platform",
-    description:
-      "A modern, responsive online store with advanced features including real-time inventory, secure payment processing, and comprehensive admin dashboard.",
-    tag: "Website",
-    category: "web",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Next.js", "Tailwind", "Stripe"],
-    featured: true,
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 2,
-    slug: "corporate-website",
-    title: "Corporate Website",
-    description:
-      "Professional business website with elegant design, smooth animations, SEO optimization, and integrated contact forms for lead generation.",
-    tag: "Website",
-    category: "web",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["React", "GSAP", "Node.js"],
-    featured: false,
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 3,
-    slug: "trading-bot",
-    title: "Advanced Trading Bot",
-    description:
-      "Intelligent Telegram bot for automated trading with real-time market analysis, price alerts, and portfolio management features.",
-    tag: "Telegram Bot",
-    category: "telegram",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Python", "Redis", "PostgreSQL"],
-    featured: true,
-    liveUrl: "#",
-  },
-  {
-    id: 4,
-    slug: "customer-support-bot",
-    title: "Customer Support Bot",
-    description:
-      "AI-powered support bot with natural language processing, ticket management, and seamless integration with CRM systems.",
-    tag: "Telegram Bot",
-    category: "telegram",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Node.js", "OpenAI", "MongoDB"],
-    featured: false,
-    liveUrl: "#",
-  },
-  {
-    id: 5,
-    slug: "saas-dashboard",
-    title: "SaaS Dashboard",
-    description:
-      "Comprehensive analytics dashboard with real-time data visualization, team collaboration tools, and advanced reporting features.",
-    tag: "Web Application",
-    category: "web",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["React", "D3.js", "Firebase"],
-    featured: true,
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 6,
-    slug: "community-bot",
-    title: "Community Management Bot",
-    description:
-      "Powerful moderation bot with auto-moderation, welcome messages, role management, and comprehensive analytics dashboard.",
-    tag: "Telegram Bot",
-    category: "telegram",
-    image:
-      "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Python", "Redis", "Docker"],
-    featured: false,
-    liveUrl: "#",
-  },
-];
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("all");
@@ -121,24 +32,24 @@ const Projects = () => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
+  // Get projects from Zustand store
+  const getProjectsByCategory = useProjectsStore(
+    (state) => state.getProjectsByCategory,
+  );
+  const filteredProjects = getProjectsByCategory(activeFilter);
+
   const filters = [
     { id: "all", label: "All Projects", icon: Sparkles },
     { id: "web", label: "Websites", icon: Globe },
     { id: "telegram", label: "Telegram Bots", icon: MessageSquare },
   ];
 
-  const filteredProjects =
-    activeFilter === "all"
-      ? projects
-      : projects.filter((p) => p.category === activeFilter);
-
   return (
     <section
       ref={sectionRef}
       id="projects"
       className="py-20 px-[5vw] lg:px-[10vw] relative overflow-hidden">
-      
-      {/* بک‌گراند ساده بدون blur */}
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/4 right-0 w-96 h-96 bg-purple-500/3 rounded-full" />
         <div className="absolute bottom-1/4 left-0 w-96 h-96 bg-blue-500/3 rounded-full" />
@@ -151,7 +62,6 @@ const Projects = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4 }}
           className="text-center mb-16">
-          
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
@@ -172,7 +82,7 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        {/* Filter Tabs - حذف framer-motion */}
+        {/* Filter Tabs */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -184,7 +94,7 @@ const Projects = () => {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all will-change-transform active:scale-95 ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-full font-semibold transition-all will-change-transform active:scale-95 cursor-pointer ${
                   activeFilter === filter.id
                     ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/50"
                     : "bg-gray-800/50 border border-gray-700 text-gray-300 hover:border-blue-500/50"
@@ -226,32 +136,45 @@ const Projects = () => {
                   }}
                   breakpoints={{
                     640: {
-                      slidesPerView: Math.min(filteredProjects.length, 1),
+                      slidesPerView: Math.min(
+                        filteredProjects.length,
+                        1,
+                      ),
                       spaceBetween: 20,
                     },
                     768: {
-                      slidesPerView: Math.min(filteredProjects.length, 2),
+                      slidesPerView: Math.min(
+                        filteredProjects.length,
+                        2,
+                      ),
                       spaceBetween: 24,
                     },
                     1024: {
-                      slidesPerView: Math.min(filteredProjects.length, 2.5),
+                      slidesPerView: Math.min(
+                        filteredProjects.length,
+                        2.5,
+                      ),
                       spaceBetween: 24,
                     },
                     1280: {
-                      slidesPerView: Math.min(filteredProjects.length, 3),
+                      slidesPerView: Math.min(
+                        filteredProjects.length,
+                        3,
+                      ),
                       spaceBetween: 30,
                     },
                   }}
                   className="!pb-10 md:!pb-16 !overflow-visible">
-                  {filteredProjects.map((project, index) => (
+                  {filteredProjects.map((project) => (
                     <SwiperSlide
                       key={project.id}
                       className="!h-auto !flex">
                       <div
-                        onMouseEnter={() => setHoveredProject(project.id)}
+                        onMouseEnter={() =>
+                          setHoveredProject(project.id)
+                        }
                         onMouseLeave={() => setHoveredProject(null)}
                         className="group relative w-full h-full flex">
-                        
                         {/* Featured Badge */}
                         {project.featured && (
                           <div className="absolute -top-3 -right-3 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-full shadow-lg">
@@ -260,7 +183,6 @@ const Projects = () => {
                         )}
 
                         <div className="bg-[#0D1B2A]/50 rounded-2xl overflow-hidden border-2 border-gray-800 hover:border-blue-500/40 transition-all duration-200 w-full flex flex-col">
-                          
                           {/* Project Image with Overlay */}
                           <div className="relative overflow-hidden aspect-video flex-shrink-0">
                             <Image
@@ -339,7 +261,8 @@ const Projects = () => {
 
                             {/* View Details Link */}
                             <div className="mt-auto">
-                              <Link href={`/projects/${project.slug}`}>
+                              <Link
+                                href={`/projects/${project.slug}`}>
                                 <span className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold text-sm group/link cursor-pointer transition-colors">
                                   View Details
                                   <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
@@ -353,7 +276,7 @@ const Projects = () => {
                   ))}
                 </Swiper>
 
-                {/* Custom Navigation Buttons - حذف framer-motion */}
+                {/* Custom Navigation Buttons */}
                 <div className="flex items-center justify-center gap-6 mt-0 md:mt-8">
                   <button className="swiper-button-prev-custom w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg hover:scale-105 active:scale-95 will-change-transform">
                     <ChevronLeft className="w-6 h-6" />
@@ -384,7 +307,7 @@ const Projects = () => {
           </motion.div>
         </AnimatePresence>
 
-        {/* Stats Section - حذف whileHover */}
+        {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -394,7 +317,11 @@ const Projects = () => {
             { label: "Projects Completed", value: "50+", icon: Code },
             { label: "Happy Clients", value: "30+", icon: Star },
             { label: "Technologies", value: "15+", icon: Zap },
-            { label: "Years Experience", value: "5+", icon: Sparkles },
+            {
+              label: "Years Experience",
+              value: "5+",
+              icon: Sparkles,
+            },
           ].map((stat, index) => {
             const Icon = stat.icon;
             return (

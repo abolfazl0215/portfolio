@@ -12,6 +12,7 @@ import {
   Zap,
   CheckCircle2,
 } from "lucide-react";
+import Link from "next/link";
 
 const About = () => {
   const skills = [
@@ -275,19 +276,19 @@ const About = () => {
             <motion.div
               variants={itemVariants}
               className="mt-10 flex flex-wrap gap-4">
-              <a
-                href="#projects"
+              <Link
+                href="/projects"
                 className="group flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-shadow will-change-transform active:scale-95">
                 View My Work
                 <Zap className="w-5 h-5" />
-              </a>
+              </Link>
 
-              <a
-                href="#contact"
+              <Link
+                href="/contact"
                 className="flex items-center gap-2 px-8 py-3 bg-gray-800/50 border border-gray-700 rounded-full font-semibold hover:border-blue-500/50 transition-colors will-change-transform active:scale-95">
                 Let's Talk
                 <Sparkles className="w-5 h-5" />
-              </a>
+              </Link>
             </motion.div>
           </motion.div>
         </div>

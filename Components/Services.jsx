@@ -302,7 +302,7 @@ const Services = () => {
             requirements.
           </p>
           <Link href="/contact">
-            <button className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-shadow active:scale-95 will-change-transform">
+            <button className="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-shadow active:scale-95 will-change-transform cursor-pointer">
               Get in Touch
             </button>
           </Link>

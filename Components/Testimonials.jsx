@@ -28,48 +28,31 @@ const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      text: "Working with this developer was an absolute pleasure! The website exceeded our expectations with its modern design and flawless functionality. Highly professional and responsive throughout the entire project.",
-      name: "Sarah Johnson",
-      role: "CEO, TechStart Inc",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=1",
+      text: "The multilingual tour booking website exceeded all our expectations! Supporting 10 languages and 5 currencies was crucial for our international clients. The admin panel makes managing tours, accommodations, and transfers incredibly easy. Our bookings have increased by 40% since launch!",
+      name: "Armen Sargsyan",
+      role: "CEO, Arax Travel Company",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=armen",
       rating: 5,
-      project: "E-Commerce Platform",
+      project: "Tour & Stay Booking Website",
     },
     {
       id: 2,
-      text: "The Telegram bot they developed transformed our customer service operations. Incredible attention to detail and the ability to understand complex requirements. I couldn't be happier with the results!",
-      name: "Michael Chen",
-      role: "Product Manager, CloudSync",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=2",
+      text: "The Armenia residency bot and mini-app transformed our business completely. The professional admin panel with analytics helps us track everything, and the AI-powered chat support handles customer inquiries 24/7. The broadcast messaging and discount campaign features are game-changers!",
+      name: "Rad",
+      role: "Founder, Arad Residency Services",
+      avatar:
+        "https://api.dicebear.com/7.x/avataaars/svg?seed=tigran",
       rating: 5,
-      project: "Customer Support Bot",
+      project: "Armenia Residency Bot & Mini App",
     },
     {
       id: 3,
-      text: "Outstanding work on our corporate website! The design is sleek, the animations are smooth, and the site performs beautifully. Communication was excellent and delivery was on time.",
-      name: "Emily Rodriguez",
-      role: "Marketing Director, InnovateCo",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=3",
+      text: "Our Link in Bio platform is exactly what we needed! The ability to customize themes, change fonts, and manage multiple sections gives our content creators complete control. It's professional, fast, and our users love the flexibility. Better than Linktree in every way!",
+      name: "mr Afshar",
+      role: "Product Manager, ULink Platform",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=alex",
       rating: 5,
-      project: "Corporate Website",
-    },
-    {
-      id: 4,
-      text: "Best investment we made for our business! The web application is robust, scalable, and user-friendly. The developer went above and beyond to ensure everything was perfect.",
-      name: "David Thompson",
-      role: "Founder, StartupHub",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=4",
-      rating: 5,
-      project: "SaaS Dashboard",
-    },
-    {
-      id: 5,
-      text: "Exceptional talent and professionalism. Our Telegram bot now handles thousands of users seamlessly. The code quality is top-notch and the support has been fantastic.",
-      name: "Lisa Wang",
-      role: "Operations Lead, AutomateX",
-      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=5",
-      rating: 5,
-      project: "Trading Bot",
+      project: "Link in Bio Website",
     },
   ];
 
@@ -106,8 +89,7 @@ const Testimonials = () => {
     <section
       ref={sectionRef}
       className="min-h-screen grid-bg bg-[#0A0F1C] py-20 px-[5vw] lg:px-[10vw] relative overflow-hidden">
-      
-      {/* بک‌گراند ساده بدون blur */}
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-blue-500/3 rounded-full" />
         <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-purple-500/3 rounded-full" />
@@ -120,7 +102,6 @@ const Testimonials = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4 }}
           className="text-center mb-16">
-          
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
@@ -141,7 +122,7 @@ const Testimonials = () => {
           </p>
         </motion.div>
 
-        {/* Stats Grid - حذف whileHover */}
+        {/* Stats Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -168,14 +149,13 @@ const Testimonials = () => {
           })}
         </motion.div>
 
-        {/* Testimonials Slider با دکمه‌های Navigation در دو طرف */}
+        {/* Testimonials Slider */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.4, delay: 0.2 }}
           className="relative">
-          
-          {/* دکمه‌های Navigation - فقط در دسکتاپ */}
+          {/* Navigation Buttons - Desktop only */}
           <div className="hidden md:block">
             <button className="swiper-button-prev-custom absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 lg:w-14 lg:h-14 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg hover:scale-105 active:scale-95 will-change-transform -translate-x-1/2 lg:-translate-x-full lg:left-0">
               <ChevronLeft className="w-6 h-6" />
@@ -235,7 +215,6 @@ const Testimonials = () => {
                         ? "bg-[#0D1B2A]/80 border-2 border-blue-500/40 shadow-2xl shadow-blue-500/20 opacity-100 scale-100"
                         : "bg-[#0D1B2A]/50 border-2 border-gray-800 opacity-60 scale-95"
                     }`}>
-                    
                     {/* Quote Icon Background */}
                     <div className="absolute top-6 right-6 opacity-10">
                       <Quote className="w-24 h-24 text-blue-400" />
@@ -313,11 +292,11 @@ const Testimonials = () => {
             ))}
           </Swiper>
 
-          {/* Custom Pagination - فقط در موبایل */}
+          {/* Custom Pagination - Mobile only */}
           <div className="swiper-pagination-custom flex justify-center gap-2 mt-8 md:hidden"></div>
         </motion.div>
 
-        {/* دکمه‌های Navigation و Pagination برای موبایل */}
+        {/* Navigation Buttons for Mobile */}
         <div className="flex md:hidden items-center justify-center gap-6 mt-8">
           <button className="swiper-button-prev-custom w-12 h-12 rounded-full border-2 border-blue-500/30 bg-gray-900/50 flex items-center justify-center text-white hover:bg-blue-600 hover:border-blue-600 transition-all shadow-lg active:scale-95">
             <ChevronLeft className="w-6 h-6" />

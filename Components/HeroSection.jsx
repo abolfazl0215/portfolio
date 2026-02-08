@@ -42,19 +42,19 @@ const HeroSection = () => {
   const socialLinks = [
     {
       name: "LinkedIn",
-      href: "#",
+      href: "https://www.linkedin.com/in/abolfazl-mokhtari-",
       icon: Linkedin,
       color: "from-blue-400 to-blue-600",
     },
     {
       name: "GitHub",
-      href: "#",
+      href: "https://github.com/abolfazl0215",
       icon: Github,
       color: "from-gray-700 to-gray-900",
     },
     {
       name: "Email",
-      href: "mailto:your@email.com",
+      href: "mailto:abolfazl021mokhtari@gmail.com",
       icon: Mail,
       color: "from-purple-400 to-purple-600",
     },
@@ -126,15 +126,15 @@ const HeroSection = () => {
             <motion.div
               variants={itemVariants}
               className="flex flex-wrap gap-4 mb-10 justify-center lg:justify-start">
-              <Link href="#projects">
-                <button className="group flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-shadow will-change-transform active:scale-95">
+              <Link href="/projects">
+                <button className="group flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-shadow will-change-transform active:scale-95 cursor-pointer">
                   <Code2 className="w-5 h-5" />
                   My Projects
                 </button>
               </Link>
 
               <a
-                href="/cv.pdf"
+                href="/abolfazl-mokhtari-resume.pdf"
                 download
                 className="flex items-center gap-2 px-8 py-3 bg-gray-800/50 border border-gray-700 rounded-full font-semibold hover:border-blue-500/50 transition-colors will-change-transform active:scale-95">
                 <Download className="w-5 h-5" />
