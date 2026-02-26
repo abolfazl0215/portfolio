@@ -178,7 +178,7 @@ The admin panel features comprehensive analytics, user management system, direct
         "AI-powered internal chat support",
       ],
       featured: true,
-      liveUrl: "https://t.me/arad_armenia_bot",
+      liveUrl: "https://t.me/rad_armenia_bot",
       githubUrl: "",
       duration: "5 months",
       client: "Residency Services Company",
