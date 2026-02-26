@@ -1,9 +1,64 @@
 import { create } from "zustand";
 
 const useProjectsStore = create((set, get) => ({
-   projects: [
+  projects: [
     {
       id: 1,
+      slug: "rad-company-website",
+      title: "Rad Company Corporate Services Website",
+      description:
+        "A multilingual corporate website for Rad Company in Armenia, offering real estate, residency services, visa assistance, education consulting, embassy appointments, and international relocation support.",
+
+      fullDescription: `This is a comprehensive corporate website developed for Rad Company, a multi-service firm based in Armenia. The company provides a wide range of services including real estate consulting, Armenian residency card processing, visa applications, embassy appointment booking, education consulting, business setup (company registration), job placement assistance, and international relocation support.
+
+The platform is designed to serve both local and international clients with multilingual capabilities and user-friendly navigation. The website presents detailed service information, structured inquiry forms, and a clear conversion-focused layout to generate qualified leads.
+
+Built with Next.js for high performance and SEO optimization, styled with Tailwind CSS for a modern and responsive UI, and powered by a Node.js/Express backend with MongoDB for scalable data management and service handling.`,
+
+      tag: "Website",
+      category: "web",
+
+      image:
+        "https://res.cloudinary.com/dtakyi9mf/image/upload/v1772113560/rad1_fpxg8c.png",
+
+      images: [
+        "https://res.cloudinary.com/dtakyi9mf/image/upload/v1772113560/rad1_fpxg8c.png",
+        "https://res.cloudinary.com/dtakyi9mf/image/upload/v1772113560/rad2_bexlwd.png",
+        "https://res.cloudinary.com/dtakyi9mf/image/upload/v1772114221/rad3_ribrtc.png",
+      ],
+
+      technologies: [
+        "Next.js",
+        "Tailwind CSS",
+        "Node.js",
+        "Express",
+        "MongoDB",
+      ],
+
+      features: [
+        "Multilingual support",
+        "Real estate service presentation",
+        "Armenian residency card application guidance",
+        "Visa and embassy appointment assistance",
+        "Education and university admission consulting",
+        "Company registration & business setup services",
+        "Job placement assistance",
+        "SEO-optimized structure",
+        "Mobile-responsive design",
+        "Lead generation contact forms",
+      ],
+
+      featured: true,
+
+      liveUrl: "https://rad-website-eight.vercel.app/en",
+      githubUrl: "",
+
+      duration: "2 weeks",
+      client: "Rad Company (Armenia)",
+      date: "February 2026",
+    },
+    {
+      id: 2,
       slug: "tour-stay-booking-website",
       title: "Tour & Stay Booking Website",
       description:
@@ -45,7 +100,7 @@ The website features a powerful admin panel that allows administrators to add, e
       date: "December 2025",
     },
     {
-      id: 2,
+      id: 3,
       slug: "link-in-bio-website",
       title: "Link in Bio Website",
       description:
@@ -87,7 +142,7 @@ The project includes a comprehensive link management system where users can add,
       date: "January 2026",
     },
     {
-      id: 3,
+      id: 4,
       slug: "armenia-residency-bot",
       title: "Armenia Residency Services Bot & Mini App",
       description:
@@ -130,7 +185,7 @@ The admin panel features comprehensive analytics, user management system, direct
       date: "November 2025",
     },
     {
-      id: 4,
+      id: 5,
       slug: "dating-bot",
       title: "Dating Telegram Bot",
       description:
@@ -172,7 +227,7 @@ The system includes user profile management, intelligent matching algorithms, re
       date: "October 2025",
     },
     {
-      id: 5,
+      id: 6,
       slug: "dating-application",
       title: "Dating Android Application",
       description:
@@ -207,7 +262,8 @@ The application features a powerful messaging system with all standard features 
         "Match suggestions",
       ],
       featured: true,
-      liveUrl: "https://cafebazaar.ir/app/com.abolfazlMokhtari.pounes",
+      liveUrl:
+        "https://cafebazaar.ir/app/com.abolfazlMokhtari.pounes",
       githubUrl: "",
       duration: "6 months",
       client: "Dating Platform",

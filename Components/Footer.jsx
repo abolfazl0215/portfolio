@@ -7,7 +7,7 @@ import {
   Mail,
   Phone,
   MapPin,
-  MessageSquare,
+  Send,
   Instagram,
   Linkedin,
   Github,
@@ -46,7 +46,7 @@ const Footer = () => {
   const socialLinks = useMemo(
     () => [
       {
-        icon: MessageSquare,
+        icon: Send,
         name: "Telegram",
         link: "https://t.me/pounes_support",
         color: "hover:text-blue-400",
@@ -110,7 +110,7 @@ const Footer = () => {
   return (
     <footer className="relative py-12 px-[5vw] lg:px-[10vw] border-t border-gray-800 overflow-hidden">
       <div className="container mx-auto relative z-10">
-        {/* CTA Section - حذف backdrop-blur */}
+        {/* CTA Section */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -232,7 +232,7 @@ const Footer = () => {
             </h4>
             <div className="space-y-3">
               <a
-                href="mailto:your.email@example.com"
+                href="mailto:abolfazl021mokhtari@gmail.com"
                 className="flex items-start gap-3 text-gray-400 hover:text-blue-400 transition-colors text-sm group">
                 <Mail className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <span className="group-hover:translate-x-1 transition-transform">

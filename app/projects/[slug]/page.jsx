@@ -197,7 +197,7 @@ const ProjectDetailPage = ({ params }) => {
                   src={projectData.images[selectedImage]}
                   alt={projectData.title}
                   fill
-                  className="object-cover"
+                  className="object-fit"
                 />
               </div>
 
