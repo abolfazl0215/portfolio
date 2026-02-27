@@ -8,9 +8,6 @@ import {
   Phone,
   Send,
   MessageSquare,
-  Linkedin,
-  Github,
-  Instagram,
   Sparkles,
   CheckCircle,
   ArrowRight,
@@ -67,14 +64,9 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // Simulate API call
     await new Promise((resolve) => setTimeout(resolve, 2000));
-
     setIsSubmitting(false);
     setIsSubmitted(true);
-
-    // Reset after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false);
       e.target.reset();
@@ -106,14 +98,13 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-20 px-[5vw] lg:px-[10vw] relative overflow-hidden">
-      {/* بک‌گراند ساده بدون blur */}
+      className="py-20 px-4 sm:px-[5vw] lg:px-[10vw] relative overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/3 rounded-full" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/3 rounded-full" />
       </div>
 
-      <div className="container mx-auto relative z-10">
+      <div className="container mx-auto relative z-10 overflow-hidden">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -15 }}
@@ -137,8 +128,8 @@ const Contact = () => {
             Let's Create Something Amazing
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Have a project in mind? Let's discuss how we can work
-            together to bring your ideas to life.
+            Have a project in mind? Let's discuss how we can work together to
+            bring your ideas to life.
           </p>
         </motion.div>
 
@@ -149,14 +140,14 @@ const Contact = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           className="grid lg:grid-cols-2 gap-12">
-          {/* Left Side - Contact Info & Social */}
-          <motion.div variants={itemVariants} className="space-y-8">
-            {/* Contact Information - حذف whileHover از motion.div */}
+          {/* Left Side */}
+          <motion.div variants={itemVariants} className="space-y-8 min-w-0">
+            {/* Contact Information */}
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
                 <div
                   key={index}
-                  className="group opacity-0 animate-fade-in"
+                  className="group opacity-0 animate-fade-in min-w-0"
                   style={{
                     animationDelay: `${index * 0.08}s`,
                     animationFillMode: "forwards",
@@ -164,32 +155,32 @@ const Contact = () => {
                   {info.link ? (
                     <a
                       href={info.link}
-                      className="flex items-start gap-4 p-4 rounded-2xl bg-[#0D1B2A]/50 border border-gray-800 hover:border-blue-500/30 transition-all hover:translate-x-1 will-change-transform">
+                      className="flex items-start gap-4 p-4 rounded-2xl bg-[#0D1B2A]/50 border border-gray-800 hover:border-blue-500/30 transition-all hover:translate-x-1 will-change-transform min-w-0">
                       <div
                         className={`w-14 h-14 rounded-xl bg-gradient-to-br ${info.gradient} flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform shadow-lg will-change-transform`}>
                         <info.icon className="w-6 h-6 text-white" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <div className="font-bold mb-1 text-white group-hover:text-blue-400 transition-colors">
                           {info.title}
                         </div>
-                        <div className="text-gray-400 text-sm">
+                        <div className="text-gray-400 text-sm break-all">
                           {info.value}
                         </div>
                       </div>
-                      <ArrowRight className="w-5 h-5 text-gray-600 group-hover:text-blue-400 opacity-0 group-hover:opacity-100 transition-all" />
+                      <ArrowRight className="w-5 h-5 text-gray-600 group-hover:text-blue-400 opacity-0 group-hover:opacity-100 transition-all flex-shrink-0" />
                     </a>
                   ) : (
-                    <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#0D1B2A]/50 border border-gray-800">
+                    <div className="flex items-start gap-4 p-4 rounded-2xl bg-[#0D1B2A]/50 border border-gray-800 min-w-0">
                       <div
                         className={`w-14 h-14 rounded-xl bg-gradient-to-br ${info.gradient} flex items-center justify-center flex-shrink-0 shadow-lg`}>
                         <info.icon className="w-6 h-6 text-white" />
                       </div>
-                      <div className="flex-1">
+                      <div className="flex-1 min-w-0">
                         <div className="font-bold mb-1 text-white">
                           {info.title}
                         </div>
-                        <div className="text-gray-400 text-sm">
+                        <div className="text-gray-400 text-sm break-all">
                           {info.value}
                         </div>
                       </div>
@@ -199,7 +190,7 @@ const Contact = () => {
               ))}
             </div>
 
-            {/* Social Links - حذف whileHover */}
+            {/* Social Links */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -219,32 +210,34 @@ const Contact = () => {
                     rel="noopener noreferrer"
                     onMouseEnter={() => setHoveredSocial(index)}
                     onMouseLeave={() => setHoveredSocial(null)}
-                    className="group flex items-center gap-4 p-4 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-blue-500/30 transition-all cursor-pointer hover:translate-x-1 will-change-transform opacity-0 animate-fade-in"
+                    className="group flex items-center gap-4 p-4 rounded-xl bg-gray-900/50 border border-gray-800 hover:border-blue-500/30 transition-all cursor-pointer hover:translate-x-1 will-change-transform opacity-0 animate-fade-in min-w-0"
                     style={{
                       animationDelay: `${0.3 + index * 0.05}s`,
                       animationFillMode: "forwards",
                     }}>
                     <div
-                      className={`w-12 h-12 rounded-lg bg-gradient-to-br ${social.color} flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg will-change-transform`}>
+                      className={`w-12 h-12 rounded-lg bg-gradient-to-br ${social.color} flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg will-change-transform flex-shrink-0`}>
                       <social.icon className="w-5 h-5 text-white" />
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <div className="font-semibold text-white group-hover:text-blue-400 transition-colors">
                         {social.name}
                       </div>
-                      <div className="text-sm text-gray-400">
+                      <div className="text-sm text-gray-400 truncate">
                         {social.username}
                       </div>
                     </div>
                     <ArrowRight
-                      className={`w-5 h-5 text-gray-600 ${social.hoverColor} transition-all ${hoveredSocial === index ? "translate-x-1" : ""}`}
+                      className={`w-5 h-5 text-gray-600 ${social.hoverColor} transition-all flex-shrink-0 ${
+                        hoveredSocial === index ? "translate-x-1" : ""
+                      }`}
                     />
                   </a>
                 ))}
               </div>
             </motion.div>
 
-            {/* Quick Link - حذف whileHover و whileTap */}
+            {/* Quick Link */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -263,11 +256,11 @@ const Contact = () => {
           </motion.div>
 
           {/* Right Side - Contact Form */}
-          <motion.div variants={itemVariants}>
-            <div className="p-8 rounded-3xl bg-[#0D1B2A]/50 border border-gray-800">
+          <motion.div variants={itemVariants} className="min-w-0">
+            <div className="p-6 sm:p-8 rounded-3xl bg-[#0D1B2A]/50 border border-gray-800">
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
+                  <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-300">
                         Your Name
@@ -279,7 +272,6 @@ const Contact = () => {
                         className="w-full px-4 py-3 rounded-xl bg-gray-900/50 border border-gray-700 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-white placeholder-gray-500"
                       />
                     </div>
-
                     <div>
                       <label className="block text-sm font-medium mb-2 text-gray-300">
                         Email Address
@@ -347,12 +339,9 @@ const Contact = () => {
                   <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                     <CheckCircle className="w-10 h-10 text-green-400" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2">
-                    Message Sent!
-                  </h3>
+                  <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
                   <p className="text-gray-400">
-                    Thank you for reaching out. I'll get back to you
-                    soon!
+                    Thank you for reaching out. I'll get back to you soon!
                   </p>
                 </motion.div>
               )}
@@ -361,7 +350,6 @@ const Contact = () => {
         </motion.div>
       </div>
 
-      {/* اضافه کردن keyframes برای fade-in */}
       <style jsx>{`
         @keyframes fade-in {
           from {
