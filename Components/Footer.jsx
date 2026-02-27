@@ -54,7 +54,7 @@ const Footer = () => {
       {
         icon: Phone,
         name: "WhatsApp",
-        link: "https://wa.me/989215193594",
+        link: "https://wa.me/37477144594",
         color: "hover:text-green-400",
       },
       {
@@ -270,7 +270,7 @@ const Footer = () => {
               by Abolfazl
             </div>
 
-            <div className="flex items-center gap-6">
+            {/* <div className="flex items-center gap-6">
               <Link
                 href="/privacy"
                 className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
@@ -281,7 +281,7 @@ const Footer = () => {
                 className="text-gray-400 hover:text-blue-400 transition-colors text-sm">
                 Terms of Service
               </Link>
-            </div>
+            </div> */}
 
             {/* Scroll to Top Button */}
             <button

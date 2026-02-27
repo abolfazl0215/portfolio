@@ -17,6 +17,7 @@ import {
   Instagram,
 } from "lucide-react";
 import Navbar from "../../Components/Navbar";
+import Footer from "../../Components/Footer";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -70,7 +71,7 @@ const ContactPage = () => {
       {
         icon: Phone,
         name: "WhatsApp",
-        link: "https://wa.me/989215193594",
+        link: "https://wa.me/37477144594",
         color: "hover:text-green-400",
       },
       {
@@ -408,6 +409,7 @@ const ContactPage = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

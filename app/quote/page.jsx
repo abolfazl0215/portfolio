@@ -15,6 +15,7 @@ import {
   Users,
   Clock,
 } from "lucide-react";
+import Footer from "../../Components/Footer";
 
 const QuotePage = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -996,6 +997,7 @@ const QuotePage = () => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

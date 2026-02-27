@@ -57,8 +57,8 @@ const Contact = () => {
     {
       icon: Phone,
       name: "WhatsApp",
-      username: "+98 921 51 93 594",
-      link: "https://wa.me/989215193594",
+      username: "+374 77 144 594",
+      link: "https://wa.me/37477144594",
       color: "from-green-400 to-green-600",
       hoverColor: "group-hover:text-green-400",
     },

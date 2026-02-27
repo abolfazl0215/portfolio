@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Navbar from "../../Components/Navbar";
+import Footer from "../../Components/Footer";
 
 const PricingPage = () => {
   const [selectedCategory, setSelectedCategory] = useState("web");
@@ -35,7 +36,8 @@ const PricingPage = () => {
           price: "$299-$599",
           priceMonthly: null,
           duration: "2-3 weeks",
-          description: "Perfect for small businesses and personal projects",
+          description:
+            "Perfect for small businesses and personal projects",
           features: [
             { name: "Responsive Landing Page", included: true },
             { name: "Modern UI/UX Design", included: true },
@@ -58,7 +60,8 @@ const PricingPage = () => {
           price: "$799-$1,499",
           priceMonthly: null,
           duration: "4-6 weeks",
-          description: "Ideal for growing businesses with complex needs",
+          description:
+            "Ideal for growing businesses with complex needs",
           features: [
             { name: "Full-Stack Application", included: true },
             { name: "Custom Admin Panel", included: true },
@@ -220,7 +223,11 @@ const PricingPage = () => {
 
     const featureCost = calculatorInputs.features.length * 150;
     const timelineFactor =
-      calculatorInputs.timeline === "rush" ? 1.3 : calculatorInputs.timeline === "flexible" ? 0.9 : 1;
+      calculatorInputs.timeline === "rush"
+        ? 1.3
+        : calculatorInputs.timeline === "flexible"
+          ? 0.9
+          : 1;
 
     const total = Math.round((base + featureCost) * timelineFactor);
     setEstimatedPrice(total);
@@ -228,7 +235,7 @@ const PricingPage = () => {
 
   return (
     <div className="min-h-screen bg-[#0A0F1C] text-white">
-      <Navbar/>
+      <Navbar />
       {/* Hero Section */}
       <section className="relative pt-36 py-20 px-[5vw] lg:px-[10vw] overflow-hidden">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -263,14 +270,12 @@ const PricingPage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto"
-          >
+            className="text-center max-w-3xl mx-auto">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6"
-            >
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6">
               <Sparkles className="w-4 h-4 text-blue-400" />
               <span className="text-sm text-blue-400 font-medium">
                 Transparent Pricing
@@ -281,14 +286,18 @@ const PricingPage = () => {
               Simple, Affordable Pricing
             </h1>
             <p className="text-xl text-gray-400 mb-8">
-              Choose the perfect plan for your project. All plans include source
-              code and free support.
+              Choose the perfect plan for your project. All plans
+              include source code and free support.
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center">
               {[
                 { id: "web", label: "Web Development", icon: Globe },
-                { id: "telegram", label: "Telegram Solutions", icon: MessageCircle },
+                {
+                  id: "telegram",
+                  label: "Telegram Solutions",
+                  icon: MessageCircle,
+                },
               ].map((category) => (
                 <motion.button
                   key={category.id}
@@ -299,8 +308,7 @@ const PricingPage = () => {
                     selectedCategory === category.id
                       ? "bg-gradient-to-r from-blue-500 to-purple-600 shadow-lg shadow-blue-500/50"
                       : "bg-gray-800/50 border border-gray-700 hover:border-blue-500/50"
-                  }`}
-                >
+                  }`}>
                   <category.icon className="w-4 h-4" />
                   {category.label}
                 </motion.button>
@@ -319,14 +327,16 @@ const PricingPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
+              transition={{ duration: 0.3 }}>
               {/* Category Title */}
               <div className="text-center mb-12">
                 <div className="inline-flex items-center gap-3 mb-4">
-                  {React.createElement(pricingData[selectedCategory].icon, {
-                    className: "w-8 h-8 text-blue-400",
-                  })}
+                  {React.createElement(
+                    pricingData[selectedCategory].icon,
+                    {
+                      className: "w-8 h-8 text-blue-400",
+                    },
+                  )}
                   <h2 className="text-3xl font-bold">
                     {pricingData[selectedCategory].title}
                   </h2>
@@ -335,87 +345,90 @@ const PricingPage = () => {
 
               {/* Pricing Cards */}
               <div className="grid md:grid-cols-3 gap-8 mb-16">
-                {pricingData[selectedCategory].plans.map((plan, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -5 }}
-                    className={`relative p-8 rounded-3xl border-2 transition-all ${
-                      plan.popular
-                        ? "bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-blue-500/10 border-blue-500/50 shadow-2xl shadow-blue-500/20 transform scale-105"
-                        : "bg-[#0D1B2A]/50 border-gray-800 hover:border-blue-500/30 backdrop-blur-sm"
-                    }`}
-                  >
-                    {plan.popular && (
-                      <motion.div
-                        initial={{ scale: 0, rotate: -12 }}
-                        animate={{ scale: 1, rotate: -12 }}
-                        className="absolute -top-4 -right-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-sm font-bold flex items-center gap-1 shadow-lg"
-                      >
-                        <Zap className="w-4 h-4" />
-                        {plan.cta}
-                      </motion.div>
-                    )}
+                {pricingData[selectedCategory].plans.map(
+                  (plan, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ y: -5 }}
+                      className={`relative p-8 rounded-3xl border-2 transition-all ${
+                        plan.popular
+                          ? "bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-blue-500/10 border-blue-500/50 shadow-2xl shadow-blue-500/20 transform scale-105"
+                          : "bg-[#0D1B2A]/50 border-gray-800 hover:border-blue-500/30 backdrop-blur-sm"
+                      }`}>
+                      {plan.popular && (
+                        <motion.div
+                          initial={{ scale: 0, rotate: -12 }}
+                          animate={{ scale: 1, rotate: -12 }}
+                          className="absolute -top-4 -right-4 px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-sm font-bold flex items-center gap-1 shadow-lg">
+                          <Zap className="w-4 h-4" />
+                          {plan.cta}
+                        </motion.div>
+                      )}
 
-                    <div className="mb-6">
-                      <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                      <div className="flex items-baseline gap-2 mb-3">
-                        <span className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                          {plan.price}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-400 mb-2">
-                        {plan.duration} delivery
-                      </p>
-                      <p className="text-gray-400 text-sm">{plan.description}</p>
-                    </div>
-
-                    <ul className="space-y-3 mb-8">
-                      {plan.features.map((feature, fIndex) => (
-                        <li
-                          key={fIndex}
-                          className="flex items-start gap-3 text-sm"
-                        >
-                          <div className="mt-0.5">
-                            {feature.included ? (
-                              <div className="w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-                                <Check className="w-3 h-3 text-blue-400" />
-                              </div>
-                            ) : (
-                              <div className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0">
-                                <X className="w-3 h-3 text-gray-600" />
-                              </div>
-                            )}
-                          </div>
-                          <span
-                            className={
-                              feature.included ? "text-gray-300" : "text-gray-600"
-                            }
-                          >
-                            {feature.name}
+                      <div className="mb-6">
+                        <h3 className="text-2xl font-bold mb-2">
+                          {plan.name}
+                        </h3>
+                        <div className="flex items-baseline gap-2 mb-3">
+                          <span className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                            {plan.price}
                           </span>
-                        </li>
-                      ))}
-                    </ul>
+                        </div>
+                        <p className="text-sm text-gray-400 mb-2">
+                          {plan.duration} delivery
+                        </p>
+                        <p className="text-gray-400 text-sm">
+                          {plan.description}
+                        </p>
+                      </div>
 
-                    <Link href="/quote">
-                      <motion.button
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                        className={`w-full py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
-                          plan.popular
-                            ? "bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/50"
-                            : "bg-gray-800 hover:bg-gray-700"
-                        }`}
-                      >
-                        {plan.cta}
-                        <ArrowRight className="w-4 h-4" />
-                      </motion.button>
-                    </Link>
-                  </motion.div>
-                ))}
+                      <ul className="space-y-3 mb-8">
+                        {plan.features.map((feature, fIndex) => (
+                          <li
+                            key={fIndex}
+                            className="flex items-start gap-3 text-sm">
+                            <div className="mt-0.5">
+                              {feature.included ? (
+                                <div className="w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                                  <Check className="w-3 h-3 text-blue-400" />
+                                </div>
+                              ) : (
+                                <div className="w-5 h-5 rounded-full bg-gray-800 flex items-center justify-center flex-shrink-0">
+                                  <X className="w-3 h-3 text-gray-600" />
+                                </div>
+                              )}
+                            </div>
+                            <span
+                              className={
+                                feature.included
+                                  ? "text-gray-300"
+                                  : "text-gray-600"
+                              }>
+                              {feature.name}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <Link href="/quote">
+                        <motion.button
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className={`w-full py-3 rounded-xl font-semibold transition-all flex items-center justify-center gap-2 ${
+                            plan.popular
+                              ? "bg-gradient-to-r from-blue-500 to-purple-600 hover:shadow-lg hover:shadow-blue-500/50"
+                              : "bg-gray-800 hover:bg-gray-700"
+                          }`}>
+                          {plan.cta}
+                          <ArrowRight className="w-4 h-4" />
+                        </motion.button>
+                      </Link>
+                    </motion.div>
+                  ),
+                )}
               </div>
 
               {/* Comparison Table */}
@@ -423,12 +436,13 @@ const PricingPage = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="overflow-x-auto"
-              >
+                className="overflow-x-auto">
                 <div className="inline-block min-w-full">
                   <div className="bg-[#0D1B2A]/50 border border-gray-800 rounded-3xl overflow-hidden backdrop-blur-sm">
                     <div className="p-6 border-b border-gray-800">
-                      <h3 className="text-2xl font-bold">Detailed Comparison</h3>
+                      <h3 className="text-2xl font-bold">
+                        Detailed Comparison
+                      </h3>
                       <p className="text-gray-400 mt-2">
                         Compare features across all plans
                       </p>
@@ -444,43 +458,44 @@ const PricingPage = () => {
                               (plan, index) => (
                                 <th
                                   key={index}
-                                  className="px-6 py-4 text-center font-semibold"
-                                >
+                                  className="px-6 py-4 text-center font-semibold">
                                   {plan.name}
                                 </th>
-                              )
+                              ),
                             )}
                           </tr>
                         </thead>
                         <tbody>
-                          {pricingData[selectedCategory].plans[0].features.map(
+                          {pricingData[
+                            selectedCategory
+                          ].plans[0].features.map(
                             (_, featureIndex) => (
                               <tr
                                 key={featureIndex}
-                                className="border-b border-gray-800/50 hover:bg-gray-800/20"
-                              >
+                                className="border-b border-gray-800/50 hover:bg-gray-800/20">
                                 <td className="px-6 py-4 text-gray-300">
                                   {
-                                    pricingData[selectedCategory].plans[0]
-                                      .features[featureIndex].name
+                                    pricingData[selectedCategory]
+                                      .plans[0].features[featureIndex]
+                                      .name
                                   }
                                 </td>
-                                {pricingData[selectedCategory].plans.map(
-                                  (plan, planIndex) => (
-                                    <td
-                                      key={planIndex}
-                                      className="px-6 py-4 text-center"
-                                    >
-                                      {plan.features[featureIndex].included ? (
-                                        <Check className="w-5 h-5 text-green-400 mx-auto" />
-                                      ) : (
-                                        <X className="w-5 h-5 text-gray-600 mx-auto" />
-                                      )}
-                                    </td>
-                                  )
-                                )}
+                                {pricingData[
+                                  selectedCategory
+                                ].plans.map((plan, planIndex) => (
+                                  <td
+                                    key={planIndex}
+                                    className="px-6 py-4 text-center">
+                                    {plan.features[featureIndex]
+                                      .included ? (
+                                      <Check className="w-5 h-5 text-green-400 mx-auto" />
+                                    ) : (
+                                      <X className="w-5 h-5 text-gray-600 mx-auto" />
+                                    )}
+                                  </td>
+                                ))}
                               </tr>
-                            )
+                            ),
                           )}
                         </tbody>
                       </table>
@@ -500,9 +515,10 @@ const PricingPage = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold mb-4">Add-ons & Extras</h2>
+            className="text-center mb-12">
+            <h2 className="text-4xl font-bold mb-4">
+              Add-ons & Extras
+            </h2>
             <p className="text-gray-400 text-lg">
               Enhance your project with additional services
             </p>
@@ -517,15 +533,16 @@ const PricingPage = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="p-6 bg-[#0D1B2A]/50 border border-gray-800 rounded-2xl hover:border-blue-500/30 transition-all backdrop-blur-sm"
-              >
+                className="p-6 bg-[#0D1B2A]/50 border border-gray-800 rounded-2xl hover:border-blue-500/30 transition-all backdrop-blur-sm">
                 <div className="flex items-start justify-between mb-4">
                   <h3 className="text-lg font-bold">{addon.name}</h3>
                   <span className="px-3 py-1 bg-blue-500/20 rounded-full text-sm font-semibold text-blue-400">
                     {addon.price}
                   </span>
                 </div>
-                <p className="text-gray-400 text-sm">{addon.description}</p>
+                <p className="text-gray-400 text-sm">
+                  {addon.description}
+                </p>
               </motion.div>
             ))}
           </div>
@@ -539,15 +556,18 @@ const PricingPage = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-[#0D1B2A]/50 border border-gray-800 rounded-3xl p-8 backdrop-blur-sm"
-          >
+            className="bg-[#0D1B2A]/50 border border-gray-800 rounded-3xl p-8 backdrop-blur-sm">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
                 <Calculator className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold">Price Calculator</h2>
-                <p className="text-gray-400">Get an instant estimate for your project</p>
+                <h2 className="text-2xl font-bold">
+                  Price Calculator
+                </h2>
+                <p className="text-gray-400">
+                  Get an instant estimate for your project
+                </p>
               </div>
             </div>
 
@@ -564,8 +584,7 @@ const PricingPage = () => {
                       projectType: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
-                >
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
                   <option value="">Select project type</option>
                   <option value="landing">Landing Page</option>
                   <option value="webapp">Full-Stack Web App</option>
@@ -589,23 +608,28 @@ const PricingPage = () => {
                   ].map((feature) => (
                     <label
                       key={feature}
-                      className="flex items-center gap-2 p-3 bg-gray-900/50 border border-gray-700 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all"
-                    >
+                      className="flex items-center gap-2 p-3 bg-gray-900/50 border border-gray-700 rounded-xl cursor-pointer hover:border-blue-500/50 transition-all">
                       <input
                         type="checkbox"
-                        checked={calculatorInputs.features.includes(feature)}
+                        checked={calculatorInputs.features.includes(
+                          feature,
+                        )}
                         onChange={(e) => {
                           if (e.target.checked) {
                             setCalculatorInputs({
                               ...calculatorInputs,
-                              features: [...calculatorInputs.features, feature],
+                              features: [
+                                ...calculatorInputs.features,
+                                feature,
+                              ],
                             });
                           } else {
                             setCalculatorInputs({
                               ...calculatorInputs,
-                              features: calculatorInputs.features.filter(
-                                (f) => f !== feature
-                              ),
+                              features:
+                                calculatorInputs.features.filter(
+                                  (f) => f !== feature,
+                                ),
                             });
                           }
                         }}
@@ -629,12 +653,13 @@ const PricingPage = () => {
                       timeline: e.target.value,
                     })
                   }
-                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
-                >
+                  className="w-full px-4 py-3 bg-gray-900/50 border border-gray-700 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
                   <option value="">Select timeline</option>
                   <option value="rush">Rush (30% premium)</option>
                   <option value="normal">Normal</option>
-                  <option value="flexible">Flexible (10% discount)</option>
+                  <option value="flexible">
+                    Flexible (10% discount)
+                  </option>
                 </select>
               </div>
 
@@ -642,8 +667,7 @@ const PricingPage = () => {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={calculateEstimate}
-                className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all flex items-center justify-center gap-2"
-              >
+                className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all flex items-center justify-center gap-2">
                 <Calculator className="w-5 h-5" />
                 Calculate Estimate
               </motion.button>
@@ -652,22 +676,22 @@ const PricingPage = () => {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl text-center"
-                >
-                  <p className="text-gray-400 mb-2">Estimated Price Range</p>
+                  className="p-6 bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-2xl text-center">
+                  <p className="text-gray-400 mb-2">
+                    Estimated Price Range
+                  </p>
                   <p className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                     ${estimatedPrice - 200} - ${estimatedPrice + 200}
                   </p>
                   <p className="text-sm text-gray-400 mt-4">
-                    This is an estimate. Final price may vary based on specific
-                    requirements.
+                    This is an estimate. Final price may vary based on
+                    specific requirements.
                   </p>
                   <Link href="/quote">
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="mt-4 px-6 py-2 bg-blue-500 rounded-full font-semibold hover:bg-blue-600 transition-colors"
-                    >
+                      className="mt-4 px-6 py-2 bg-blue-500 rounded-full font-semibold hover:bg-blue-600 transition-colors">
                       Get Detailed Quote
                     </motion.button>
                   </Link>
@@ -685,22 +709,22 @@ const PricingPage = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="p-6 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-start gap-4"
-          >
+            className="p-6 bg-blue-500/10 border border-blue-500/20 rounded-2xl flex items-start gap-4">
             <Info className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />
             <div>
-              <h3 className="font-semibold mb-2">Have questions about pricing?</h3>
+              <h3 className="font-semibold mb-2">
+                Have questions about pricing?
+              </h3>
               <p className="text-gray-400 text-sm mb-4">
-                Check out our FAQ section or contact me directly for a custom quote
-                tailored to your specific needs.
+                Check out our FAQ section or contact me directly for a
+                custom quote tailored to your specific needs.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/services#faq">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-6 py-2 bg-blue-500/20 border border-blue-500/30 rounded-full text-sm font-semibold hover:bg-blue-500/30 transition-colors"
-                  >
+                    className="px-6 py-2 bg-blue-500/20 border border-blue-500/30 rounded-full text-sm font-semibold hover:bg-blue-500/30 transition-colors">
                     View FAQ
                   </motion.button>
                 </Link>
@@ -708,8 +732,7 @@ const PricingPage = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="px-6 py-2 bg-blue-500 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors"
-                  >
+                    className="px-6 py-2 bg-blue-500 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors">
                     Contact Me
                   </motion.button>
                 </Link>
@@ -718,6 +741,7 @@ const PricingPage = () => {
           </motion.div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };

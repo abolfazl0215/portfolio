@@ -1,14 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Mail, Phone, MapPin } from "lucide-react";
 import Navbar from "../Components/Navbar";
-import Image from "next/image";
 import Services from "../Components/Services";
 import Projects from "../Components/Projects";
 import HeroSection from "../Components/HeroSection";

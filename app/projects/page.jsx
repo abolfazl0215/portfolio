@@ -17,169 +17,24 @@ import {
   Search,
   Filter,
   Calendar,
-  Award,
   TrendingUp,
   Users,
 } from "lucide-react";
 import Navbar from "../../Components/Navbar";
-
-// همان داده‌های پروژه - می‌توانید این را به یک فایل جداگانه منتقل کنید
-const projects = [
-  {
-    id: 1,
-    slug: "e-commerce-platform",
-    title: "E-Commerce Platform",
-    description:
-      "A modern, responsive online store with advanced features including real-time inventory, secure payment processing, and comprehensive admin dashboard.",
-    fullDescription:
-      "Complete e-commerce solution built with Next.js featuring product management, cart functionality, checkout process, order tracking, and admin panel for managing products, orders, and customers.",
-    tag: "Website",
-    category: "web",
-    image: "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Next.js", "Tailwind", "Stripe", "MongoDB"],
-    featured: true,
-    liveUrl: "#",
-    githubUrl: "#",
-    date: "2024-12",
-    client: "Online Retail Co.",
-    duration: "3 months",
-  },
-  {
-    id: 2,
-    slug: "corporate-website",
-    title: "Corporate Website",
-    description:
-      "Professional business website with elegant design, smooth animations, SEO optimization, and integrated contact forms for lead generation.",
-    fullDescription:
-      "Corporate website showcasing company services, team members, case studies, and blog. Features include advanced SEO, performance optimization, and content management system.",
-    tag: "Website",
-    category: "web",
-    image: "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["React", "GSAP", "Node.js", "Strapi"],
-    featured: false,
-    liveUrl: "#",
-    githubUrl: "#",
-    date: "2024-11",
-    client: "Tech Solutions Inc.",
-    duration: "2 months",
-  },
-  {
-    id: 3,
-    slug: "trading-bot",
-    title: "Advanced Trading Bot",
-    description:
-      "Intelligent Telegram bot for automated trading with real-time market analysis, price alerts, and portfolio management features.",
-    fullDescription:
-      "Sophisticated trading bot with integration to multiple crypto exchanges, real-time price tracking, automated trading strategies, and detailed analytics dashboard.",
-    tag: "Telegram Bot",
-    category: "telegram",
-    image: "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Python", "Redis", "PostgreSQL", "Telegram API"],
-    featured: true,
-    liveUrl: "#",
-    date: "2024-10",
-    client: "Crypto Trading Group",
-    duration: "4 months",
-  },
-  {
-    id: 4,
-    slug: "customer-support-bot",
-    title: "Customer Support Bot",
-    description:
-      "AI-powered support bot with natural language processing, ticket management, and seamless integration with CRM systems.",
-    fullDescription:
-      "Intelligent customer support solution with AI-powered responses, ticket creation and tracking, knowledge base integration, and multi-language support.",
-    tag: "Telegram Bot",
-    category: "telegram",
-    image: "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Node.js", "OpenAI", "MongoDB", "Telegram API"],
-    featured: false,
-    liveUrl: "#",
-    date: "2024-09",
-    client: "Support Services Ltd.",
-    duration: "2 months",
-  },
-  {
-    id: 5,
-    slug: "saas-dashboard",
-    title: "SaaS Dashboard",
-    description:
-      "Comprehensive analytics dashboard with real-time data visualization, team collaboration tools, and advanced reporting features.",
-    fullDescription:
-      "Full-featured SaaS platform with user management, subscription handling, real-time analytics, data visualization, and team collaboration features.",
-    tag: "Web Application",
-    category: "web",
-    image: "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["React", "D3.js", "Firebase", "Stripe"],
-    featured: true,
-    liveUrl: "#",
-    githubUrl: "#",
-    date: "2024-08",
-    client: "Analytics Platform",
-    duration: "5 months",
-  },
-  {
-    id: 6,
-    slug: "community-bot",
-    title: "Community Management Bot",
-    description:
-      "Powerful moderation bot with auto-moderation, welcome messages, role management, and comprehensive analytics dashboard.",
-    fullDescription:
-      "Complete community management solution with automated moderation, user engagement tools, analytics, custom commands, and admin dashboard.",
-    tag: "Telegram Bot",
-    category: "telegram",
-    image: "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Python", "Redis", "Docker", "Telegram API"],
-    featured: false,
-    liveUrl: "#",
-    date: "2024-07",
-    client: "Community Platform",
-    duration: "3 months",
-  },
-  {
-    id: 7,
-    slug: "portfolio-website",
-    title: "Creative Portfolio",
-    description:
-      "Stunning portfolio website with animations, project showcases, and interactive elements for creative professionals.",
-    fullDescription:
-      "Portfolio website featuring project galleries, case studies, client testimonials, and blog. Built with focus on performance and visual appeal.",
-    tag: "Website",
-    category: "web",
-    image: "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Next.js", "Framer Motion", "Tailwind"],
-    featured: false,
-    liveUrl: "#",
-    githubUrl: "#",
-    date: "2024-06",
-    client: "Creative Designer",
-    duration: "1 month",
-  },
-  {
-    id: 8,
-    slug: "booking-bot",
-    title: "Appointment Booking Bot",
-    description:
-      "Smart booking bot for scheduling appointments, managing calendars, and sending automated reminders to customers.",
-    fullDescription:
-      "Automated booking system with calendar integration, payment processing, reminder notifications, and customer management features.",
-    tag: "Telegram Bot",
-    category: "telegram",
-    image: "https://res.cloudinary.com/dtakyi9mf/image/upload/v1768893218/pexels-arthousestudio-4530180_b7otjf.jpg",
-    technologies: ["Node.js", "Google Calendar", "Stripe", "PostgreSQL"],
-    featured: false,
-    liveUrl: "#",
-    date: "2024-05",
-    client: "Healthcare Clinic",
-    duration: "2 months",
-  },
-];
+import useProjectsStore from "../../stores/ProjectsStore";
+import Footer from "../../Components/Footer";
 
 const ProjectsPage = () => {
   const [activeFilter, setActiveFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("newest");
   const [hoveredProject, setHoveredProject] = useState(null);
+
+  // Get projects from Zustand store
+  const getProjectsByCategory = useProjectsStore(
+    (state) => state.getProjectsByCategory,
+  );
+  const filteredProjects = getProjectsByCategory(activeFilter);
 
   const filters = [
     { id: "all", label: "All Projects", icon: Sparkles },
@@ -194,60 +49,23 @@ const ProjectsPage = () => {
     { id: "az", label: "A-Z" },
   ];
 
-  // Filter and search projects
-  const filteredProjects = useMemo(() => {
-    let filtered = projects;
-
-    // Apply category filter
-    if (activeFilter === "featured") {
-      filtered = filtered.filter((p) => p.featured);
-    } else if (activeFilter !== "all") {
-      filtered = filtered.filter((p) => p.category === activeFilter);
-    }
-
-    // Apply search
-    if (searchQuery) {
-      filtered = filtered.filter(
-        (p) =>
-          p.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.technologies.some((t) =>
-            t.toLowerCase().includes(searchQuery.toLowerCase())
-          )
-      );
-    }
-
-    // Apply sorting
-    filtered.sort((a, b) => {
-      if (sortBy === "newest") {
-        return b.date.localeCompare(a.date);
-      } else if (sortBy === "oldest") {
-        return a.date.localeCompare(b.date);
-      } else if (sortBy === "az") {
-        return a.title.localeCompare(b.title);
-      }
-      return 0;
-    });
-
-    return filtered;
-  }, [activeFilter, searchQuery, sortBy]);
-
   const stats = [
     {
       label: "Total Projects",
-      value: projects.length,
+      value: filteredProjects.length,
       icon: Code,
       color: "from-blue-500 to-cyan-500",
     },
     {
       label: "Featured Work",
-      value: projects.filter((p) => p.featured).length,
+      value: filteredProjects.filter((p) => p.featured).length,
       icon: Star,
       color: "from-yellow-400 to-orange-500",
     },
     {
       label: "Technologies",
-      value: new Set(projects.flatMap((p) => p.technologies)).size,
+      value: new Set(filteredProjects.flatMap((p) => p.technologies))
+        .size,
       icon: Zap,
       color: "from-purple-500 to-pink-500",
     },
@@ -261,7 +79,7 @@ const ProjectsPage = () => {
 
   return (
     <div className="min-h-screen bg-[#0A0F1C] text-white">
-      <Navbar/>
+      <Navbar />
       {/* Hero Section */}
       <section className="relative pt-36 py-20 px-[5vw] lg:px-[10vw] overflow-hidden">
         {/* Background Effects */}
@@ -297,14 +115,12 @@ const ProjectsPage = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-center max-w-4xl mx-auto mb-16"
-          >
+            className="text-center max-w-4xl mx-auto mb-16">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6"
-            >
+              className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/20 rounded-full mb-6">
               <Sparkles className="w-4 h-4 text-blue-400" />
               <span className="text-sm text-blue-400 font-medium">
                 Portfolio Showcase
@@ -315,8 +131,8 @@ const ProjectsPage = () => {
               My Projects
             </h1>
             <p className="text-xl text-gray-400 leading-relaxed">
-              Explore a collection of web applications and Telegram bots built
-              with modern technologies and best practices.
+              Explore a collection of web applications and Telegram
+              bots built with modern technologies and best practices.
             </p>
           </motion.div>
 
@@ -325,8 +141,7 @@ const ProjectsPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
-          >
+            className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
@@ -334,17 +149,17 @@ const ProjectsPage = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 + index * 0.1 }}
                 whileHover={{ y: -5 }}
-                className="bg-[#0D1B2A]/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 text-center hover:border-blue-500/40 transition-all"
-              >
+                className="bg-[#0D1B2A]/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 text-center hover:border-blue-500/40 transition-all">
                 <div
-                  className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-full flex items-center justify-center mx-auto mb-4`}
-                >
+                  className={`w-12 h-12 bg-gradient-to-r ${stat.color} rounded-full flex items-center justify-center mx-auto mb-4`}>
                   <stat.icon className="w-6 h-6 text-white" />
                 </div>
                 <div className="text-3xl font-bold bg-gradient-to-r from-white via-blue-100 to-purple-200 bg-clip-text text-transparent mb-2">
                   {stat.value}
                 </div>
-                <div className="text-sm text-gray-400">{stat.label}</div>
+                <div className="text-sm text-gray-400">
+                  {stat.label}
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -369,17 +184,18 @@ const ProjectsPage = () => {
                       activeFilter === filter.id
                         ? "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/50"
                         : "bg-gray-800/50 border border-gray-700 text-gray-300 hover:border-blue-500/50"
-                    }`}
-                  >
+                    }`}>
                     <Icon className="w-4 h-4" />
                     {filter.label}
                     {filter.id !== "all" && (
                       <span className="ml-1 text-xs opacity-70">
                         (
                         {filter.id === "featured"
-                          ? projects.filter((p) => p.featured).length
-                          : projects.filter((p) => p.category === filter.id)
-                              .length}
+                          ? filteredProjects.filter((p) => p.featured)
+                              .length
+                          : filteredProjects.filter(
+                              (p) => p.category === filter.id,
+                            ).length}
                         )
                       </span>
                     )}
@@ -408,8 +224,7 @@ const ProjectsPage = () => {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="pl-11 pr-8 py-2.5 bg-gray-800/50 border border-gray-700 rounded-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-white text-sm appearance-none cursor-pointer"
-                >
+                  className="pl-11 pr-8 py-2.5 bg-gray-800/50 border border-gray-700 rounded-full focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all text-white text-sm appearance-none cursor-pointer">
                   {sortOptions.map((option) => (
                     <option key={option.id} value={option.id}>
                       {option.label}
@@ -424,9 +239,9 @@ const ProjectsPage = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="mt-6 text-gray-400 text-sm"
-          >
-            Showing {filteredProjects.length} of {projects.length} projects
+            className="mt-6 text-gray-400 text-sm">
+            Showing {filteredProjects.length} of{" "}
+            {filteredProjects.length} projects
           </motion.div>
         </div>
       </section>
@@ -442,8 +257,7 @@ const ProjectsPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-              >
+                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {filteredProjects.map((project, index) => (
                   <motion.div
                     key={project.id}
@@ -452,16 +266,14 @@ const ProjectsPage = () => {
                     transition={{ delay: index * 0.05 }}
                     onMouseEnter={() => setHoveredProject(project.id)}
                     onMouseLeave={() => setHoveredProject(null)}
-                    className="group relative"
-                  >
+                    className="group relative">
                     {/* Featured Badge */}
                     {project.featured && (
                       <motion.div
                         initial={{ scale: 0, rotate: -45 }}
                         animate={{ scale: 1, rotate: 0 }}
                         transition={{ delay: 0.3 + index * 0.05 }}
-                        className="absolute -top-3 -right-3 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-full shadow-lg"
-                      >
+                        className="absolute -top-3 -right-3 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 p-3 rounded-full shadow-lg">
                         <Star className="w-4 h-4 text-white fill-white" />
                       </motion.div>
                     )}
@@ -489,16 +301,14 @@ const ProjectsPage = () => {
                               : { opacity: 0, y: 20 }
                           }
                           transition={{ duration: 0.3 }}
-                          className="absolute inset-0 flex items-center justify-center gap-4"
-                        >
+                          className="absolute inset-0 flex items-center justify-center gap-4">
                           {project.liveUrl && (
                             <a
                               href={project.liveUrl}
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className="p-3 bg-blue-500 hover:bg-blue-600 rounded-full shadow-lg transition-all transform hover:scale-110"
-                            >
+                              className="p-3 bg-blue-500 hover:bg-blue-600 rounded-full shadow-lg transition-all transform hover:scale-110">
                               <ExternalLink className="w-5 h-5 text-white" />
                             </a>
                           )}
@@ -508,8 +318,7 @@ const ProjectsPage = () => {
                               target="_blank"
                               rel="noopener noreferrer"
                               onClick={(e) => e.stopPropagation()}
-                              className="p-3 bg-gray-800 hover:bg-gray-700 rounded-full shadow-lg transition-all transform hover:scale-110"
-                            >
+                              className="p-3 bg-gray-800 hover:bg-gray-700 rounded-full shadow-lg transition-all transform hover:scale-110">
                               <Github className="w-5 h-5 text-white" />
                             </a>
                           )}
@@ -543,10 +352,12 @@ const ProjectsPage = () => {
                           <div className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
                             <span>
-                              {new Date(project.date).toLocaleDateString(
-                                "en-US",
-                                { year: "numeric", month: "short" }
-                              )}
+                              {new Date(
+                                project.date,
+                              ).toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "short",
+                              })}
                             </span>
                           </div>
                           {project.duration && (
@@ -559,14 +370,15 @@ const ProjectsPage = () => {
 
                         {/* Technologies */}
                         <div className="flex flex-wrap gap-2 mb-4">
-                          {project.technologies.slice(0, 3).map((tech, i) => (
-                            <span
-                              key={i}
-                              className="px-3 py-1 bg-gray-800/50 border border-gray-700 rounded-lg text-xs text-gray-300 font-medium"
-                            >
-                              {tech}
-                            </span>
-                          ))}
+                          {project.technologies
+                            .slice(0, 3)
+                            .map((tech, i) => (
+                              <span
+                                key={i}
+                                className="px-3 py-1 bg-gray-800/50 border border-gray-700 rounded-lg text-xs text-gray-300 font-medium">
+                                {tech}
+                              </span>
+                            ))}
                           {project.technologies.length > 3 && (
                             <span className="px-3 py-1 bg-gray-800/50 border border-gray-700 rounded-lg text-xs text-gray-400 font-medium">
                               +{project.technologies.length - 3}
@@ -578,8 +390,7 @@ const ProjectsPage = () => {
                         <Link href={`/projects/${project.slug}`}>
                           <motion.span
                             whileHover={{ x: 5 }}
-                            className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold text-sm group/link cursor-pointer"
-                          >
+                            className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300 font-semibold text-sm group/link cursor-pointer">
                             View Details
                             <ArrowRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1" />
                           </motion.span>
@@ -593,12 +404,13 @@ const ProjectsPage = () => {
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-20"
-              >
+                className="text-center py-20">
                 <div className="w-20 h-20 bg-gray-800/50 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Search className="w-10 h-10 text-gray-600" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">No Projects Found</h3>
+                <h3 className="text-2xl font-bold mb-2">
+                  No Projects Found
+                </h3>
                 <p className="text-gray-400 mb-6">
                   Try adjusting your filters or search query
                 </p>
@@ -609,8 +421,7 @@ const ProjectsPage = () => {
                     setActiveFilter("all");
                     setSearchQuery("");
                   }}
-                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all"
-                >
+                  className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/50 transition-all">
                   Reset Filters
                 </motion.button>
               </motion.div>
@@ -619,62 +430,7 @@ const ProjectsPage = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-[5vw] lg:px-[10vw]">
-        <div className="container mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-blue-600 rounded-3xl p-12 text-center"
-          >
-            <div className="relative z-10">
-              <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-                Ready to Start Your Project?
-              </h2>
-              <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                Let's discuss your ideas and turn them into reality. Get a free
-                consultation and project quote.
-              </p>
-              <div className="flex flex-wrap gap-4 justify-center">
-                <Link href="/quote">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 bg-white text-blue-600 rounded-full font-bold hover:shadow-lg transition-shadow flex items-center gap-2"
-                  >
-                    <Zap className="w-5 h-5" />
-                    Get Free Quote
-                  </motion.button>
-                </Link>
-                <Link href="/contact">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/20 rounded-full font-bold hover:bg-white/20 transition-colors"
-                  >
-                    Contact Me
-                  </motion.button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Background Animation */}
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.5, 0.3],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent rounded-3xl"
-            />
-          </motion.div>
-        </div>
-      </section>
+      <Footer />
     </div>
   );
 };
